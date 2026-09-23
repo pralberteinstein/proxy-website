@@ -240,3 +240,9 @@ form .meta { margin-top: 10px; }
   .dot { animation: none; }
   .ledger tbody tr { opacity: 1; }
 }
+
+/* Draft EA files: hidden unless ?preview */
+.win.draft, .finder-item.draft { display: none; }
+.preview .finder-item.draft { display: flex; }
+.preview .win.draft:not([hidden]) { display: flex; }
+.draft-stamp { color: #b3261e; text-transform: uppercase; }

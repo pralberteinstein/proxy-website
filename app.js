@@ -49,7 +49,7 @@
     if (top) front(top);
     else {
       document.querySelectorAll('.icon').forEach(i => i.classList.remove('active'));
-      history.replaceState(null, '', location.pathname);
+      history.replaceState(null, '', location.pathname + location.search);
     }
   }
 
@@ -123,6 +123,12 @@
     note.textContent = 'Received. Thank you.';
     e.target.querySelector('.submit').disabled = true;
   });
+
+  // Draft files only show with ?preview
+  if (new URLSearchParams(location.search).has('preview')) {
+    document.body.classList.add('preview');
+    document.getElementById('item-count').textContent = '5 items';
+  }
 
   // Initial state
   const hash = location.hash.slice(1);
