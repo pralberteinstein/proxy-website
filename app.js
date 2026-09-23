@@ -129,7 +129,8 @@
   if (isPhone()) {
     open(hash || 'readme');
   } else {
-    // Ledger first; readme comes to the front once the rows have landed
+    // Readme sits in place; ledger loads over it, then drops behind it
+    open('readme');
     open('ledger');
     const rows = document.querySelectorAll('.ledger tbody tr').length;
     setTimeout(() => open(hash && hash !== 'ledger' ? hash : 'readme'), 180 * rows + 400);
