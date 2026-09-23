@@ -129,7 +129,9 @@
   if (isPhone()) {
     open(hash || 'readme');
   } else {
-    open('readme');
-    setTimeout(() => open(hash && hash !== 'readme' ? hash : 'ledger'), 500);
+    // Ledger first; readme comes to the front once the rows have landed
+    open('ledger');
+    const rows = document.querySelectorAll('.ledger tbody tr').length;
+    setTimeout(() => open(hash && hash !== 'ledger' ? hash : 'readme'), 180 * rows + 400);
   }
 })();
