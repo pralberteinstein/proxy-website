@@ -127,7 +127,7 @@
   // Draft files only show with ?preview
   if (new URLSearchParams(location.search).has('preview')) {
     document.body.classList.add('preview');
-    document.getElementById('item-count').textContent = '5 items';
+    document.getElementById('item-count').textContent = '6 items';
   }
 
   // Initial state
