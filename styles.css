@@ -115,7 +115,23 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .win-foot { padding: 0 18px 16px; }
 .win-foot .next { margin-top: 0; }
 
-/* team/ folder */
+/* team/ folder, Finder icon view */
+.finder-bar {
+  display: grid; grid-template-columns: 40px 1fr auto; align-items: center;
+  height: 34px; padding: 0 12px; border-bottom: 1px solid var(--rule);
+  font-size: 13px; font-weight: 500;
+}
+.finder-bar .mono { color: var(--ink-3); font-weight: 400; }
+.finder { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 20px 8px; padding: 12px 0 20px; }
+.finder-item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.finder-item svg { width: 48px; height: 58px; overflow: visible; }
+.finder-item svg path { fill: var(--paper); stroke: var(--ink); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.finder-item svg text { font: 500 8px var(--mono); fill: var(--ink); text-anchor: middle; }
+.finder-item .thumb { width: 48px; height: 58px; border: 1px solid var(--ink); overflow: hidden; display: block; }
+.finder-item .thumb img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; filter: grayscale(1) contrast(1.08); display: block; }
+.finder-item > span:last-child { font: 11px/1.2 var(--mono); padding: 2px 4px; }
+.finder-item:hover > span:last-child, .finder-item:focus-visible > span:last-child { background: var(--ink); color: var(--paper); }
+
 .files { list-style: none; border-top: 1px solid var(--ink); }
 .files a { grid-template-columns: 130px 1fr auto; }
 .files a .mono:last-child { color: var(--ink-3); text-transform: uppercase; }
