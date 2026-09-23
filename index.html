@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Proxy</title>
+<meta name="description" content="Proxy is a human plus an agent who act as you when you're not there.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="bar">
+  <div class="bar-l">
+    <a href="#" class="wordmark" data-open="readme">Proxy</a>
+    <a href="#" data-open="readme">Information</a>
+    <a href="#" data-open="access">Request access</a>
+  </div>
+  <div class="bar-r">
+    <span class="status"><i class="dot"></i>EA online</span>
+    <span id="clock" class="mono">00:00:00</span>
+  </div>
+</header>
+
+<main class="desk" id="desk">
+
+  <!-- Icons -->
+  <button class="icon" data-open="readme"  style="--x:84%;--y:9%"><svg viewBox="0 0 40 48"><path d="M1 1h26l12 12v34H1z M27 1v12h12"/><text x="20" y="38">TXT</text></svg><span>readme.txt</span></button>
+  <button class="icon" data-open="method"  style="--x:92%;--y:9%"><svg viewBox="0 0 40 48"><path d="M1 1h26l12 12v34H1z M27 1v12h12"/><text x="20" y="38">SVG</text></svg><span>method.svg</span></button>
+  <button class="icon" data-open="ledger"  style="--x:84%;--y:27%"><svg viewBox="0 0 40 48"><path d="M1 1h26l12 12v34H1z M27 1v12h12"/><text x="20" y="38">LOG</text></svg><span>ledger.log</span></button>
+  <button class="icon" data-open="rules"   style="--x:92%;--y:27%"><svg viewBox="0 0 40 48"><path d="M1 1h26l12 12v34H1z M27 1v12h12"/><text x="20" y="38">MD</text></svg><span>rules.md</span></button>
+  <button class="icon" data-open="operator" style="--x:84%;--y:45%"><svg viewBox="0 0 40 48"><path d="M1 1h26l12 12v34H1z M27 1v12h12"/><text x="20" y="38">CV</text></svg><span>operator.cv</span></button>
+  <button class="icon" data-open="terms"   style="--x:92%;--y:45%"><svg viewBox="0 0 40 48"><path d="M1 1h26l12 12v34H1z M27 1v12h12"/><text x="20" y="38">PDF</text></svg><span>terms.pdf</span></button>
+  <button class="icon" data-open="access"  style="--x:84%;--y:63%"><svg viewBox="0 0 40 48"><path d="M1 1h38v46H1z M1 13h38"/><path d="M8 24h24 M8 31h24 M8 38h14"/></svg><span>request-access</span></button>
+  <button class="icon trash" data-open="trash" style="--x:92%;--y:82%"><svg viewBox="0 0 40 48"><path d="M4 9h32 M14 9V3h12v6 M7 9l3 38h20l3-38 M16 16v24 M24 16v24"/></svg><span>Trash</span></button>
+
+  <!-- readme.txt -->
+  <section class="win" id="readme" data-x="4%" data-y="8%" style="--w:440px">
+    <header class="win-bar"><span>readme.txt</span><button class="close" aria-label="Close">✕</button></header>
+    <div class="win-body">
+      <p class="lede">Proxy is a human plus an agent who act as you when you're not there.</p>
+      <p>We build the software between you and your EA: what they use to get things done, and what you use to see what's going on.</p>
+      <p>A person does every task first. When a task is easy and keeps coming back, an agent tries it. It takes over only after it passes your EA's own review.</p>
+      <p>Agents run on open-source models. Your data stays yours.</p>
+      <p class="links mono"><a href="#" data-open="method">method.svg</a> <a href="#" data-open="ledger">ledger.log</a> <a href="#" data-open="operator">operator.cv</a></p>
+    </div>
+  </section>
+
+  <!-- method.svg -->
+  <section class="win" id="method" data-x="18%" data-y="14%" style="--w:660px" hidden>
+    <header class="win-bar"><span>method.svg</span><button class="close" aria-label="Close">✕</button></header>
+    <div class="win-body">
+      <figure>
+        <svg class="fig" viewBox="0 0 600 150" role="img" aria-label="You see what's going on through the View. Your EA works through the Workbench. Agents sit inside Proxy.">
+          <rect x="1" y="45" width="90" height="60"/><text x="46" y="80" class="c">You</text>
+          <rect x="509" y="45" width="90" height="60"/><text x="554" y="80" class="c">Your EA</text>
+          <rect x="150" y="1" width="300" height="148" class="dash"/>
+          <text x="162" y="20" class="m">PROXY</text>
+          <rect x="165" y="45" width="125" height="60"/><text x="227" y="72" class="c">View</text><text x="227" y="90" class="c m">what you see</text>
+          <rect x="310" y="45" width="125" height="60"/><text x="372" y="72" class="c">Workbench</text><text x="372" y="90" class="c m">what they use</text>
+          <rect x="165" y="118" width="270" height="20" class="fill"/><text x="300" y="132" class="c m inv">AGENTS · OPEN-SOURCE MODELS</text>
+          <path d="M91 75H165 M290 75H310 M435 75H509"/>
+        </svg>
+        <figcaption><span class="mono">Fig. 1</span> Where Proxy sits.</figcaption>
+      </figure>
+      <figure>
+        <svg class="fig" viewBox="0 0 600 170" role="img" aria-label="A human does the task. If it repeats, an agent tries it. The EA reviews. Pass: the agent owns it. Fail: back to the human.">
+          <text x="0" y="14" class="m">01</text><rect x="1" y="24" width="120" height="50"/><text x="61" y="54" class="c">Human does it</text>
+          <text x="160" y="14" class="m">02</text><rect x="161" y="24" width="120" height="50"/><text x="221" y="54" class="c">It repeats</text>
+          <text x="320" y="14" class="m">03</text><rect x="321" y="24" width="120" height="50"/><text x="381" y="54" class="c">Agent tries it</text>
+          <text x="480" y="14" class="m">04</text><rect x="479" y="24" width="120" height="50"/><text x="539" y="54" class="c">EA reviews</text>
+          <path d="M121 49H161 M281 49H321 M441 49H479"/>
+          <path d="M150 45l8 4-8 4 M310 45l8 4-8 4 M468 45l8 4-8 4" class="head"/>
+          <path d="M569 74v36"/><path d="M565 102l4 8 4-8" class="head"/><text x="560" y="96" class="m r">PASS</text>
+          <rect x="494" y="110" width="105" height="44" class="fill"/><text x="546" y="137" class="c inv">Agent owns it</text>
+          <path d="M484 74v70H61V74" class="dash"/><path d="M57 84l4-8 4 8" class="head"/>
+          <text x="280" y="136" class="c m">FAIL · BACK TO A PERSON</text>
+        </svg>
+        <figcaption><span class="mono">Fig. 2</span> How a task moves from a person to an agent. Nothing moves without passing review.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ledger.log -->
+  <section class="win" id="ledger" data-x="30%" data-y="30%" style="--w:720px" hidden>
+    <header class="win-bar"><span>ledger.log</span><button class="close" aria-label="Close">✕</button></header>
+    <div class="win-body">
+      <p class="meta mono">Client 001 · Hardware founder · Sep 07–15, 2026 · 11 of 27 entries · anonymized</p>
+      <table class="ledger mono">
+        <thead><tr><th>Date</th><th>Ask</th><th>Judgement</th><th>By</th></tr></thead>
+        <tbody>
+          <tr><td>09-08</td><td>Took over from two EAs. No re-onboarding for the founder. Built an operating doc from past patterns.</td><td>learned</td><td>human</td></tr>
+          <tr><td>09-08</td><td>Lunch reservation at noon. Flagged a 1 PM clash before booking.</td><td>flagged</td><td>human</td></tr>
+          <tr><td>09-08</td><td>Booked a call at the wrong time. Told the founder and fixed it before they noticed.</td><td>owned it</td><td>human</td></tr>
+          <tr class="warn"><td>09-09</td><td>Agent trial: it moved 1:1s without asking and broke focus time. Not ready yet.</td><td>—</td><td>agent <em>fail</em></td></tr>
+          <tr><td>09-10</td><td>One onsite turned into six asks over two days. None of them dropped.</td><td>tracked</td><td>human</td></tr>
+          <tr><td>09-10</td><td>Checked with finance before taking the founder out of expense approvals.</td><td>checked</td><td>human</td></tr>
+          <tr><td>09-11</td><td>Had to move a recruiter call twice. Apologised and offered a backup time.</td><td>softened</td><td>human</td></tr>
+          <tr><td>09-11</td><td>Eight internal 1:1s rescheduled over DM from one script.</td><td>scripted</td><td>human <em>→ agent</em></td></tr>
+          <tr><td>09-14</td><td>Found an hour for five people before one flew abroad. Got a colleague to move their own meeting to make room.</td><td>persuaded</td><td>human</td></tr>
+          <tr><td>09-15</td><td>Candidate was 14 hours ahead. The founder started early so the candidate wouldn't interview at 5 AM.</td><td>protected</td><td>human</td></tr>
+          <tr><td>09-15</td><td>Noticed the founder already had lunch with a teammate. Freed up their 1:1 for recruiter calls.</td><td>noticed</td><td>human</td></tr>
+        </tbody>
+      </table>
+      <blockquote>“You always take care of things and it doesn't get dropped.”<cite class="mono">Client 001, Sep 15. To improve: speed, attention to detail.</cite></blockquote>
+    </div>
+  </section>
+
+  <!-- rules.md -->
+  <section class="win" id="rules" data-x="8%" data-y="36%" style="--w:460px" hidden>
+    <header class="win-bar"><span>rules.md</span><button class="close" aria-label="Close">✕</button></header>
+    <div class="win-body">
+      <p class="meta mono">What your EA knows · learned in week one</p>
+      <ol class="rules">
+        <li>Look at the calendar first. They may already be in a room together.</li>
+        <li>Offer two options. Say which one is better for us.</li>
+        <li>Always give a fallback, so a no doesn't end the thread.</li>
+        <li>Be honest about the cost to the other side. “That's 5 AM for them.”</li>
+        <li>Second change? Apologise once. Explain briefly.</li>
+        <li>Don't move meetings on a Friday.</li>
+        <li>Batch yes/no questions so the founder answers in one reply.</li>
+        <li>When they change something themselves, ask why. Keep the rule.</li>
+        <li>Tell them about a mistake before they find it.</li>
+      </ol>
+      <p class="meta mono">Client 001 only</p>
+      <ul class="rules plain">
+        <li>No meetings 12–1. Hard stop 4:00–5:00.</li>
+        <li>Two interviews a day, max. Resume on the invite.</li>
+        <li>“Mike” means Mike L.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- operator.cv -->
+  <section class="win" id="operator" data-x="44%" data-y="10%" style="--w:520px" hidden>
+    <header class="win-bar"><span>operator.cv</span><button class="close" aria-label="Close">✕</button></header>
+    <div class="win-body cv">
+      <img src="assets/operator.jpg" alt="Pranjali Awasthi" width="900" height="600">
+      <div>
+        <p class="meta mono">Operator 001</p>
+        <p class="lede">Pranjali Awasthi</p>
+        <p>For our first three customers, your EA is me.</p>
+        <dl class="mono">
+          <dt>Before</dt><dd>Built two companies. One through HF0, acquired. One through YC, 600+ customers who switched from Superhuman.</dd>
+          <dt>Now</dt><dd>EA to a hardware founder, since Sep 2026.</dd>
+          <dt>Team</dt><dd>EAs who've worked for founders at Airwallex, Magic and others.</dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- terms.pdf -->
+  <section class="win" id="terms" data-x="56%" data-y="40%" style="--w:400px" hidden>
+    <header class="win-bar"><span>terms.pdf</span><button class="close" aria-label="Close">✕</button></header>
+    <div class="win-body">
+      <dl class="terms">
+        <dt class="mono">Price</dt><dd>$2,000 / month</dd>
+        <dt class="mono">Hours</dt><dd>24/7</dd>
+        <dt class="mono">Seats</dt><dd>First three customers. Market rate after.</dd>
+        <dt class="mono">Guarantee</dt><dd>At day 30 you get every task we took off your plate and the time it would have cost you. If that isn't worth $2,000 to you, we refund you.</dd>
+      </dl>
+    </div>
+  </section>
+
+  <!-- request-access -->
+  <section class="win" id="access" data-x="60%" data-y="18%" style="--w:400px" hidden>
+    <header class="win-bar"><span>request-access</span><button class="close" aria-label="Close">✕</button></header>
+    <div class="win-body">
+      <form id="access-form">
+        <label><span class="mono">Name</span><input name="name" required autocomplete="name"></label>
+        <label><span class="mono">Work email</span><input name="email" type="email" required autocomplete="email"></label>
+        <label><span class="mono">Company</span><input name="company" autocomplete="organization"></label>
+        <label><span class="mono">First thing you'd hand off</span><textarea name="handoff" rows="3"></textarea></label>
+        <button type="submit" class="submit">Request access →</button>
+        <p class="meta mono" id="form-note">Three seats at launch.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- Trash -->
+  <section class="win" id="trash" data-x="62%" data-y="52%" style="--w:340px" hidden>
+    <header class="win-bar"><span>Trash</span><button class="close" aria-label="Close">✕</button></header>
+    <div class="win-body">
+      <p class="meta mono">Things you won't do again</p>
+      <ul class="trashlist">
+        <li>Chasing a reply</li>
+        <li>Rescheduling for the third time</li>
+        <li>Converting time zones</li>
+        <li>Booking conference rooms</li>
+        <li>Filing receipts</li>
+        <li>“Does this time work?”</li>
+      </ul>
+    </div>
+  </section>
+
+  <p class="colophon mono">Proxy v0.1 · 2026-09-22 · Geist / Geist Mono</p>
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>
