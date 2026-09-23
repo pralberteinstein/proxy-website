@@ -96,9 +96,37 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 
 .lede { font-size: 22px; line-height: 1.2; letter-spacing: -0.02em; font-weight: 500; }
 .meta { color: var(--ink-3); text-transform: uppercase; }
-.links { display: flex; gap: 16px; padding-top: 4px; }
-.links a, .win-body a { border-bottom: 1px solid var(--rule); }
-.links a:hover { border-color: var(--ink); }
+
+/* Tour + next-file CTAs */
+.tour { padding-top: 8px; }
+.tour .meta { padding-bottom: 6px; border-bottom: 1px solid var(--ink); }
+.tour a, .next, .files a {
+  display: grid; grid-template-columns: 36px 1fr auto; align-items: baseline; gap: 8px;
+  padding: 9px 8px; margin: 0 -8px; border-bottom: 1px solid var(--rule);
+}
+.tour a .mono:first-child, .next .mono:first-child { color: var(--ink-3); }
+.tour a .mono:last-child, .next .mono:last-child { color: var(--ink-2); }
+.tour a:hover, .next:hover, .files a:hover { background: var(--ink); color: var(--paper); }
+.tour a:hover .mono, .next:hover .mono, .files a:hover .mono { color: var(--paper); }
+.tour a.primary, .next.primary { background: var(--ink); color: var(--paper); border-bottom-color: var(--ink); }
+.tour a.primary .mono, .next.primary .mono { color: var(--paper); }
+.tour a.primary:hover, .next.primary:hover { opacity: 0.85; }
+.next { margin-top: 20px; border-top: 1px solid var(--ink); grid-template-columns: 44px 1fr auto; }
+.win-foot { padding: 0 18px 16px; }
+.win-foot .next { margin-top: 0; }
+
+/* team/ folder */
+.files { list-style: none; border-top: 1px solid var(--ink); }
+.files a { grid-template-columns: 130px 1fr auto; }
+.files a .mono:last-child { color: var(--ink-3); text-transform: uppercase; }
+.redact { background: var(--ink); color: transparent; user-select: none; line-height: 1; }
+.files a:hover .redact { background: var(--paper); }
+.withheld {
+  width: 160px; height: 200px; display: flex; align-items: flex-end; padding: 10px;
+  color: var(--ink-3); text-transform: uppercase; line-height: 1.4;
+  background: repeating-linear-gradient(135deg, var(--rule) 0 1px, transparent 1px 7px);
+  border: 1px solid var(--rule);
+}
 
 /* Figures */
 figure + figure { margin-top: 28px; }
@@ -182,7 +210,9 @@ form .meta { margin-top: 10px; }
   .win-bar { height: 40px; font-size: 12px; }
   .close { width: 40px; height: 40px; }
   .cv { grid-template-columns: 1fr; }
-  .cv img { width: 100%; height: 260px; }
+  .cv img, .withheld { width: 100%; height: 260px; }
+  .files a { grid-template-columns: 1fr auto; }
+  .files a span:nth-child(2) { grid-row: 2; grid-column: 1 / -1; }
   .ledger thead { display: none; }
   .ledger tr { display: grid; grid-template-columns: auto 1fr auto; gap: 2px 10px; padding: 8px 0; border-bottom: 1px solid var(--rule); }
   .ledger td { border: 0; padding: 0; }
