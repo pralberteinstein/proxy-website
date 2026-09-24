@@ -163,10 +163,23 @@ figcaption .mono { margin-right: 6px; color: var(--ink); }
 .ledger { width: 100%; border-collapse: collapse; font-size: 11.5px; line-height: 1.45; }
 .ledger th { text-align: left; font-weight: 400; color: var(--ink-3); text-transform: uppercase; padding: 6px 10px 6px 0; border-bottom: 1px solid var(--ink); }
 .ledger td { vertical-align: top; padding: 8px 10px 8px 0; border-bottom: 1px solid var(--rule); }
-.ledger td:first-child, .ledger td:nth-child(3), .ledger td:last-child { white-space: nowrap; color: var(--ink-2); }
+.ledger td:first-child, .ledger td.ping { white-space: nowrap; color: var(--ink-2); }
+.ledger td.ping { text-align: center; font-size: 13px; font-variant-numeric: tabular-nums; }
+.ledger th:nth-child(3) { text-align: center; }
+.ledger td.ready { width: 150px; color: var(--ink-2); }
+.ledger td.ready b { font-weight: 500; color: var(--ink); display: block; }
+.ledger td.ready em { font-style: normal; color: var(--ink-3); }
+.ledger tr.warn td.ready b { text-decoration: line-through; color: var(--ink-3); }
+.ask { display: block; }
+.depth { margin-top: 6px; padding: 1px 6px; border: 1px solid var(--ink); font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.04em; }
+.depth::after { content: " +"; }
+.depth[aria-expanded="true"] { background: var(--ink); color: var(--paper); }
+.depth[aria-expanded="true"]::after { content: " −"; }
+.steps { margin: 8px 0 2px; padding: 0; list-style: none; counter-reset: s; border-left: 1px solid var(--ink); }
+.steps li { counter-increment: s; display: grid; grid-template-columns: 26px 1fr; padding: 3px 0 3px 10px; font-size: 12.5px; color: var(--ink-2); }
+.steps li::before { content: counter(s, decimal-leading-zero); font: 10.5px/1.7 var(--mono); color: var(--ink-3); }
+.steps li:last-child { color: var(--ink); }
 .ledger td:nth-child(2) { font-family: var(--sans); font-size: 13px; letter-spacing: 0; }
-.ledger em { font-style: normal; color: var(--ink-3); }
-.ledger tr.warn td:last-child em { text-decoration: line-through; }
 .ledger tr.open td { color: var(--ink-3); }
 .ledger tbody tr { opacity: 0; }
 .ledger tbody tr.in { opacity: 1; transition: opacity 0.25s; }

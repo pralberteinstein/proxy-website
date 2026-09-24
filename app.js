@@ -116,6 +116,15 @@
     rows.forEach((r, i) => setTimeout(() => r.classList.add('in'), 180 * i + 150));
   }
 
+  // Ledger: expand a task to see every step
+  document.querySelectorAll('.depth').forEach(b => {
+    b.addEventListener('click', () => {
+      const open = b.getAttribute('aria-expanded') !== 'true';
+      b.setAttribute('aria-expanded', open);
+      document.getElementById(b.getAttribute('aria-controls')).hidden = !open;
+    });
+  });
+
   // Form (not wired to a backend yet)
   document.getElementById('access-form').addEventListener('submit', e => {
     e.preventDefault();
