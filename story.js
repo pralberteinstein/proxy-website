@@ -1,4 +1,4 @@
-// Readme story: you and your EA become one face; an agent learns it, line by line.
+// Readme story: you leave the room, your EA steps into your outline, an agent learns from them.
 (() => {
   const canvas = document.getElementById('story');
   if (!canvas) return;
@@ -20,19 +20,23 @@
   function pixels(hair) {
     const out = [];
     for (let y = 0; y < G; y++) for (let x = 0; x < G; x++) {
-      if (hair(x, y)) out.push({ x, y, k: 'solid' });
-      else if (features(x, y)) out.push({ x, y, k: 'solid' });
+      if (hair(x, y) || features(x, y)) out.push({ x, y, k: 'solid' });
       else if (face(x, y) && (x + y) % 2 === 0) out.push({ x, y, k: 'dither' });
     }
     return out;
   }
 
   // Timeline (ms)
-  const T = { a: 0, b: 2200, merge: 4400, mergeEnd: 5900, shift: 6900, shiftEnd: 7600, scan: 7800, scanEnd: 10200 };
-  const SPREAD = 600; // how long each face takes to draw in
-  const STEPS = [[T.a, '01 You'], [T.b, '02 Your EA'], [T.merge, '03 Your better half'], [T.shift, '04 An agent learns from you both']];
+  const T = {
+    you: 0, ea: 2200,
+    leave: 4400, leaveEnd: 5200,      // your face fades to an outline
+    step: 5400, stepEnd: 6700,        // your EA slides into it
+    scan: 7900, scanEnd: 10300,       // an agent reads them, row by row
+  };
+  const SPREAD = 600;
+  const STEPS = [[T.you, '01 You'], [T.ea, '02 Your EA'], [T.leave, '03 Thinks like you'], [T.scan - 300, '04 An agent learns from them']];
 
-  let W, H, p, y0, copyX, parts = [], t0 = Infinity, mouse = null;
+  let W, H, p, y0, youX, eaX, you = [], ea = [], t0 = Infinity, mouse = null;
 
   function layout() {
     const dpr = window.devicePixelRatio || 1;
@@ -41,27 +45,11 @@
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     p = Math.max(3, Math.min(7, Math.floor(Math.min(W / 58, H / 20))));
     y0 = Math.round((H - G * p) / 2);
-    const left = Math.round(W * 0.25 - (G * p) / 2);
-    const right = Math.round(W * 0.75 - (G * p) / 2);
-    const mid = Math.round(W * 0.5 - (G * p) / 2);
-    const human = Math.round(W * 0.3 - (G * p) / 2);
-    copyX = Math.round(W * 0.7 - (G * p) / 2);
-
-    parts = [];
-    const add = (list, ox, src, appearFrom) => list.forEach(px => {
-      const keep = src === 'you' ? px.x <= 8 : px.x >= 9; // left half of you, right half of your EA
-      parts.push({
-        ...px, src, keep,
-        sx: ox + px.x * p, sy: y0 + px.y * p,
-        tx: mid + px.x * p, ty: y0 + px.y * p, hx: human + px.x * p,
-        appear: appearFrom + Math.random() * SPREAD,
-        drift: (Math.random() - 0.5) * 30, fall: 20 + Math.random() * 30,
-        ox: 0, oy: 0, vx: 0, vy: 0,
-      });
-    });
-    add(pixels(hairYou), left, 'you', T.a);
-    add(pixels(hairEA), right, 'ea', T.b);
-
+    youX = Math.round(W * 0.3 - (G * p) / 2);
+    eaX = Math.round(W * 0.7 - (G * p) / 2);
+    const mk = (list, start) => list.map(px => ({ ...px, appear: start + Math.random() * SPREAD, ox: 0, oy: 0, vx: 0, vy: 0 }));
+    you = mk(pixels(hairYou), T.you);
+    ea = mk(pixels(hairEA), T.ea);
   }
 
   const ease = u => (u < 0.5 ? 4 * u * u * u : 1 - Math.pow(-2 * u + 2, 3) / 2);
@@ -72,59 +60,72 @@
     return { ink: cs.getPropertyValue('--ink').trim() || '#111', faint: cs.getPropertyValue('--ink-3').trim() || 'rgba(0,0,0,.45)' };
   }
 
+  // Cursor pushes pixels away; they spring back
+  function nudge(q, x, y) {
+    if (mouse) {
+      const dx = x + q.ox - mouse.x, dy = y + q.oy - mouse.y, d2 = dx * dx + dy * dy;
+      if (d2 < 900) { const f = (900 - d2) / 900; q.vx += (dx / 30) * f * 1.6; q.vy += (dy / 30) * f * 1.6; }
+    }
+    q.vx += -q.ox * 0.08; q.vy += -q.oy * 0.08; q.vx *= 0.8; q.vy *= 0.8;
+    q.ox += q.vx; q.oy += q.vy;
+  }
+
   function frame(now) {
-    const t = reduce ? T.agentEnd + 1000 : now - t0;
+    const t = reduce ? T.scanEnd + 1000 : now - t0;
     const { ink, faint } = colors();
     ctx.clearRect(0, 0, W, H);
 
-    const em = ease(clamp((t - T.merge) / (T.mergeEnd - T.merge)));
-    const es = ease(clamp((t - T.shift) / (T.shiftEnd - T.shift)));
-    const scan = clamp((t - T.scan) / (T.scanEnd - T.scan)); // 0..1 down the face
+    const leave = ease(clamp((t - T.leave) / (T.leaveEnd - T.leave)));
+    const step = ease(clamp((t - T.step) / (T.stepEnd - T.step)));
+    const scan = clamp((t - T.scan) / (T.scanEnd - T.scan));
     const scanY = y0 + scan * G * p;
 
-    for (const q of parts) {
+    // You: solid, then an outline once you've left
+    for (const q of you) {
       if (t < q.appear) continue;
-      // Cursor pushes pixels away; they spring back
-      if (mouse) {
-        const dx = (q.keep ? q.sx + (q.tx - q.sx) * em + (q.hx - q.tx) * es : q.sx) + q.ox - mouse.x;
-        const dy = q.sy + q.oy - mouse.y;
-        const d2 = dx * dx + dy * dy;
-        if (d2 < 900) { const f = (900 - d2) / 900; q.vx += (dx / 30) * f * 1.6; q.vy += (dy / 30) * f * 1.6; }
+      const x = youX + q.x * p, y = y0 + q.y * p;
+      nudge(q, x, y);
+      const a = clamp((t - q.appear) / 120);
+      const X = Math.round(x + q.ox), Y = Math.round(y + q.oy);
+      const s = q.k === 'dither' ? p - 1 : p;
+      if (leave < 1) { ctx.globalAlpha = a * (1 - leave); ctx.fillStyle = ink; ctx.fillRect(X, Y, s, s); }
+      if (leave > 0 && q.k === 'solid') {
+        ctx.globalAlpha = leave; ctx.strokeStyle = faint; ctx.lineWidth = 1;
+        ctx.strokeRect(X + 0.5, Y + 0.5, p - 1, p - 1);
       }
-      q.vx += -q.ox * 0.08; q.vy += -q.oy * 0.08; q.vx *= 0.8; q.vy *= 0.8;
-      q.ox += q.vx; q.oy += q.vy;
+    }
 
-      let x, y, a = clamp((t - q.appear) / 120);
-      if (q.keep) { x = q.sx + (q.tx - q.sx) * em + (q.hx - q.tx) * es; y = q.sy; }
-      else { x = q.sx + q.drift * em; y = q.sy + q.fall * em; a *= 1 - em; }
-      if (a <= 0) continue;
-      ctx.globalAlpha = a;
+    // Your EA: solid, then slides into your outline
+    for (const q of ea) {
+      if (t < q.appear) continue;
+      const x = eaX + (youX - eaX) * step + q.x * p, y = y0 + q.y * p;
+      nudge(q, x, y);
+      ctx.globalAlpha = clamp((t - q.appear) / 120);
       ctx.fillStyle = ink;
       const s = q.k === 'dither' ? p - 1 : p;
       ctx.fillRect(Math.round(x + q.ox), Math.round(y + q.oy), s, s);
     }
-    ctx.globalAlpha = 1;
 
-    // Agent: a scan line reads the face; an outlined copy builds on the right, row by row
+    // Agent: a scan line reads your EA; an outlined copy builds where they stood
     if (t >= T.scan) {
       ctx.strokeStyle = ink; ctx.lineWidth = 1;
-      for (const q of parts) {
-        if (!q.keep || q.ty >= scanY) continue;
+      for (const q of ea) {
+        const qy = y0 + q.y * p;
+        if (qy >= scanY) continue;
         const s = q.k === 'dither' ? p - 2 : p - 1;
-        ctx.globalAlpha = clamp((scanY - q.ty) / (p * 2));
-        ctx.strokeRect(copyX + q.x * p + 0.5, q.ty + 0.5, s, s);
+        ctx.globalAlpha = clamp((scanY - qy) / (p * 2));
+        ctx.strokeRect(eaX + q.x * p + 0.5, qy + 0.5, s, s);
       }
       if (scan < 1) {
-        ctx.globalAlpha = 1;
-        ctx.fillStyle = ink;
-        const x0 = Math.round(W * 0.3 - (G * p) / 2) - p, x1 = copyX + G * p + p;
+        ctx.globalAlpha = 1; ctx.fillStyle = ink;
+        const x0 = youX - p, x1 = eaX + G * p + p;
         ctx.fillRect(x0, Math.round(scanY), x1 - x0, 1);
       }
-      ctx.globalAlpha = 1;
     }
+    ctx.globalAlpha = 1;
 
-    const step = STEPS.filter(([at]) => t >= at).pop();
-    if (step && stepEl.textContent !== step[1]) stepEl.textContent = step[1];
+    const cur = STEPS.filter(([at]) => t >= at).pop();
+    if (cur && stepEl.textContent !== cur[1]) stepEl.textContent = cur[1];
     requestAnimationFrame(frame);
   }
 
