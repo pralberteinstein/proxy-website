@@ -1,4 +1,4 @@
-// Readme story: you and your EA become one face; an agent grows in the seam.
+// Readme story: you and your EA become one face; an agent learns it, line by line.
 (() => {
   const canvas = document.getElementById('story');
   if (!canvas) return;
@@ -28,10 +28,11 @@
   }
 
   // Timeline (ms)
-  const T = { a: 0, b: 800, merge: 2000, mergeEnd: 3200, agent: 3400, agentEnd: 4600 };
-  const STEPS = [[T.a, '01 You'], [T.b, '02 Your EA'], [T.merge, '03 Your better half'], [T.agent, '04 + an agent in the seam']];
+  const T = { a: 0, b: 2200, merge: 4400, mergeEnd: 5900, shift: 6900, shiftEnd: 7600, scan: 7800, scanEnd: 10200 };
+  const SPREAD = 600; // how long each face takes to draw in
+  const STEPS = [[T.a, '01 You'], [T.b, '02 Your EA'], [T.merge, '03 Your better half'], [T.shift, '04 An agent learns from you both']];
 
-  let W, H, p, parts = [], seam = [], t0 = Infinity, mouse = null;
+  let W, H, p, y0, copyX, parts = [], t0 = Infinity, mouse = null;
 
   function layout() {
     const dpr = window.devicePixelRatio || 1;
@@ -39,10 +40,12 @@
     canvas.width = W * dpr; canvas.height = H * dpr;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     p = Math.max(3, Math.min(7, Math.floor(Math.min(W / 58, H / 20))));
-    const y0 = Math.round((H - G * p) / 2);
+    y0 = Math.round((H - G * p) / 2);
     const left = Math.round(W * 0.25 - (G * p) / 2);
     const right = Math.round(W * 0.75 - (G * p) / 2);
     const mid = Math.round(W * 0.5 - (G * p) / 2);
+    const human = Math.round(W * 0.3 - (G * p) / 2);
+    copyX = Math.round(W * 0.7 - (G * p) / 2);
 
     parts = [];
     const add = (list, ox, src, appearFrom) => list.forEach(px => {
@@ -50,8 +53,8 @@
       parts.push({
         ...px, src, keep,
         sx: ox + px.x * p, sy: y0 + px.y * p,
-        tx: mid + px.x * p, ty: y0 + px.y * p,
-        appear: appearFrom + Math.random() * 700,
+        tx: mid + px.x * p, ty: y0 + px.y * p, hx: human + px.x * p,
+        appear: appearFrom + Math.random() * SPREAD,
         drift: (Math.random() - 0.5) * 30, fall: 20 + Math.random() * 30,
         ox: 0, oy: 0, vx: 0, vy: 0,
       });
@@ -59,10 +62,6 @@
     add(pixels(hairYou), left, 'you', T.a);
     add(pixels(hairEA), right, 'ea', T.b);
 
-    seam = [];
-    const cols = new Set(parts.filter(q => q.keep).map(q => q.y));
-    [...cols].sort((a, b) => a - b).forEach((y, i) =>
-      seam.push({ x: mid + 9 * p, y: y0 + y * p, at: T.agent + i * 55 }));
   }
 
   const ease = u => (u < 0.5 ? 4 * u * u * u : 1 - Math.pow(-2 * u + 2, 3) / 2);
@@ -78,14 +77,16 @@
     const { ink, faint } = colors();
     ctx.clearRect(0, 0, W, H);
 
-    const m = clamp((t - T.merge) / (T.mergeEnd - T.merge));
-    const em = ease(m);
+    const em = ease(clamp((t - T.merge) / (T.mergeEnd - T.merge)));
+    const es = ease(clamp((t - T.shift) / (T.shiftEnd - T.shift)));
+    const scan = clamp((t - T.scan) / (T.scanEnd - T.scan)); // 0..1 down the face
+    const scanY = y0 + scan * G * p;
 
     for (const q of parts) {
       if (t < q.appear) continue;
       // Cursor pushes pixels away; they spring back
       if (mouse) {
-        const dx = q.sx + (q.tx - q.sx) * (q.keep ? em : 0) + q.ox - mouse.x;
+        const dx = (q.keep ? q.sx + (q.tx - q.sx) * em + (q.hx - q.tx) * es : q.sx) + q.ox - mouse.x;
         const dy = q.sy + q.oy - mouse.y;
         const d2 = dx * dx + dy * dy;
         if (d2 < 900) { const f = (900 - d2) / 900; q.vx += (dx / 30) * f * 1.6; q.vy += (dy / 30) * f * 1.6; }
@@ -94,7 +95,7 @@
       q.ox += q.vx; q.oy += q.vy;
 
       let x, y, a = clamp((t - q.appear) / 120);
-      if (q.keep) { x = q.sx + (q.tx - q.sx) * em; y = q.sy; }
+      if (q.keep) { x = q.sx + (q.tx - q.sx) * em + (q.hx - q.tx) * es; y = q.sy; }
       else { x = q.sx + q.drift * em; y = q.sy + q.fall * em; a *= 1 - em; }
       if (a <= 0) continue;
       ctx.globalAlpha = a;
@@ -104,24 +105,20 @@
     }
     ctx.globalAlpha = 1;
 
-    // Agent: hollow squares climb the seam, then keep quietly checking pixels on both sides
-    if (t >= T.agent) {
-      ctx.strokeStyle = faint; ctx.lineWidth = 1;
-      for (const s of seam) {
-        if (t < s.at) continue;
-        const a = clamp((t - s.at) / 150);
-        ctx.globalAlpha = a;
-        ctx.strokeRect(Math.round(s.x - p / 2) + 0.5, Math.round(s.y) + 0.5, p - 1, p - 1);
+    // Agent: a scan line reads the face; an outlined copy builds on the right, row by row
+    if (t >= T.scan) {
+      ctx.strokeStyle = ink; ctx.lineWidth = 1;
+      for (const q of parts) {
+        if (!q.keep || q.ty >= scanY) continue;
+        const s = q.k === 'dither' ? p - 2 : p - 1;
+        ctx.globalAlpha = clamp((scanY - q.ty) / (p * 2));
+        ctx.strokeRect(copyX + q.x * p + 0.5, q.ty + 0.5, s, s);
       }
-      if (t > T.agentEnd) {
-        const kept = parts.filter(q => q.keep);
-        const n = 3, beat = Math.floor(t / 420);
-        for (let i = 0; i < n; i++) {
-          const q = kept[(beat * 7 + i * 31) % kept.length];
-          ctx.globalAlpha = 0.9;
-          ctx.strokeStyle = ink;
-          ctx.strokeRect(Math.round(q.tx + q.ox) - 1.5, Math.round(q.ty + q.oy) - 1.5, p + 2, p + 2);
-        }
+      if (scan < 1) {
+        ctx.globalAlpha = 1;
+        ctx.fillStyle = ink;
+        const x0 = Math.round(W * 0.3 - (G * p) / 2) - p, x1 = copyX + G * p + p;
+        ctx.fillRect(x0, Math.round(scanY), x1 - x0, 1);
       }
       ctx.globalAlpha = 1;
     }
