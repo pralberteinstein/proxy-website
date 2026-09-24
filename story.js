@@ -31,7 +31,7 @@
     scan: 7900, scanEnd: 10300,       // an agent reads them, row by row
   };
   const SPREAD = 600;
-  const STEPS = [[T.you, '01 You'], [T.ea, '02 Your EA'], [T.leave, '03 Thinks like you'], [T.scan - 300, '04 An agent learns from them']];
+  const STEPS = [[T.you, '01 You'], [T.ea, '02 Your EA'], [T.leave, '03 They think like you'], [T.scan - 300, '04 An agent learns from them']];
 
   let W, H, p, y0, youX, eaX, you = [], ea = [], t0 = Infinity, mouse = null;
 
