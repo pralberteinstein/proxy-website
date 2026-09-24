@@ -159,10 +159,10 @@
     open(hash || 'readme');
     playStory();
   } else {
-    // Readme sits in place; ledger loads over it, then drops behind it
-    open('readme');
+    // Readme on top from the start; ledger loads behind it
     open('ledger');
-    const rows = document.querySelectorAll('.ledger tbody tr').length;
-    setTimeout(() => { open(hash && hash !== 'ledger' ? hash : 'readme'); playStory(); }, 180 * rows + 400);
+    open('readme');
+    playStory();
+    if (hash && hash !== 'readme' && hash !== 'ledger') open(hash);
   }
 })();
