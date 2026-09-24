@@ -291,3 +291,5 @@ form .meta { margin-top: 10px; }
 /* Superpower row */
 .cv dt.power { color: var(--ink); }
 .cv dd.power { font-weight: 500; }
+
+.status.off .dot { background: var(--ink-3); animation: none; }
