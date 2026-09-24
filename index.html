@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=1790292559">
+<link rel="stylesheet" href="styles.css?v=1790293052">
 </head>
 <body>
 
@@ -40,9 +40,12 @@
   <section class="win" id="readme" data-x="4%" data-y="8%" style="--w:440px">
     <header class="win-bar"><span>readme.txt</span><button class="close" aria-label="Close">✕</button></header>
     <div class="win-body">
+      <figure class="story" aria-label="You and your EA become one. An agent grows in the seam between you.">
+        <canvas id="story"></canvas>
+        <figcaption class="story-cap mono"><span id="story-step">01 You</span><span class="story-hint">Click to replay</span></figcaption>
+      </figure>
       <p class="lede">Proxy is a human chief of staff plus an agent.</p>
       <p>Send the ask in Slack or email. We only ping you when we actually need you.</p>
-      <p>You see every task as it moves.</p>
       <p>Over time, agents pick up the boring repeat stuff.</p>
       <p>Open-source models. Your data stays yours.</p>
       <a href="#" class="next primary" data-open="method"><span class="mono">Start</span><span>method.svg</span><span class="mono">→</span></a>
@@ -156,7 +159,7 @@
         <a href="#" data-open="michelle" class="finder-item draft"><svg viewBox="0 0 40 48"><path d="M1 1h26l12 12v34H1z M27 1v12h12"/><text x="20" y="38">CV</text></svg><span>michelle.cv</span></a>
       </div>
       <p class="meta mono">Names withheld until you're matched</p>
-      <p>Close to a decade each. Led teams of up to 100 assistants.</p>
+      <p>Our EAs have close to a decade of experience each, and have led teams of up to 100 assistants.</p>
       <a href="#" class="next" data-open="operator"><span class="mono">Next</span><span>operator-001.cv</span><span class="mono">→</span></a>
     </div>
   </section>
@@ -318,6 +321,7 @@
   <p class="colophon mono">Proxy v0.1 · 2026-09-22 · Geist / Geist Mono</p>
 </main>
 
-<script src="app.js?v=1790292559"></script>
+<script src="story.js?v=1790293052"></script>
+<script src="app.js?v=1790293052"></script>
 </body>
 </html>

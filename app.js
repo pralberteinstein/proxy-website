@@ -154,13 +154,15 @@
 
   // Initial state
   const hash = location.hash.slice(1);
+  const playStory = () => window.dispatchEvent(new Event('story:play'));
   if (isPhone()) {
     open(hash || 'readme');
+    playStory();
   } else {
     // Readme sits in place; ledger loads over it, then drops behind it
     open('readme');
     open('ledger');
     const rows = document.querySelectorAll('.ledger tbody tr').length;
-    setTimeout(() => open(hash && hash !== 'ledger' ? hash : 'readme'), 180 * rows + 400);
+    setTimeout(() => { open(hash && hash !== 'ledger' ? hash : 'readme'); playStory(); }, 180 * rows + 400);
   }
 })();
