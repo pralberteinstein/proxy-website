@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=1790292457">
+<link rel="stylesheet" href="styles.css?v=1790292559">
 </head>
 <body>
 
@@ -41,11 +41,11 @@
     <header class="win-bar"><span>readme.txt</span><button class="close" aria-label="Close">✕</button></header>
     <div class="win-body">
       <p class="lede">Proxy is a human chief of staff plus an agent.</p>
-      <p>Send us the ask in Slack or email. We figure it out and only ping you when we actually need you.</p>
-      <p>You see every task as it moves. What we did and why.</p>
-      <p>Over time our agents pick up the boring repeat stuff, so your EA has more room for the things that actually need a person. Something only goes to an agent once it's as good as your EA at it.</p>
-      <p>Our agents run on open-source models. Your data stays yours.</p>
-      <a href="#" class="next primary" data-open="method"><span class="mono">Start</span><span>Take the tour</span><span class="mono">method.svg →</span></a>
+      <p>Send the ask in Slack or email. We only ping you when we actually need you.</p>
+      <p>You see every task as it moves.</p>
+      <p>Over time, agents pick up the boring repeat stuff.</p>
+      <p>Open-source models. Your data stays yours.</p>
+      <a href="#" class="next primary" data-open="method"><span class="mono">Start</span><span>method.svg</span><span class="mono">→</span></a>
     </div>
   </section>
 
@@ -64,7 +64,7 @@
           <rect x="165" y="118" width="270" height="20" class="fill"/><text x="300" y="132" class="c m inv">AGENTS · OPEN-SOURCE MODELS</text>
           <path d="M91 75H165 M290 75H310 M435 75H509"/>
         </svg>
-        <figcaption><span class="mono">Fig. 1</span> Where Proxy sits.</figcaption>
+        <figcaption><span class="mono">Fig. 1</span> System.</figcaption>
       </figure>
       <figure class="bench">
         <div class="bench-grid">
@@ -73,9 +73,9 @@
           <div><p class="meta mono">Agent + you</p><p class="bench-q">Times you stepped in, per task</p></div>
         </div>
         <p class="bench-rule">An agent takes a task over only when it pings you no more than your EA does.</p>
-        <figcaption><span class="mono">Fig. 2</span> How we benchmark agents. The ledger's “Pinged exec” column is this number.</figcaption>
+        <figcaption><span class="mono">Fig. 2</span> Benchmark.</figcaption>
       </figure>
-      <a href="#" class="next" data-open="ledger"><span class="mono">Next</span><span>A week of real work</span><span class="mono">ledger.log →</span></a>
+      <a href="#" class="next" data-open="ledger"><span class="mono">Next</span><span>ledger.log</span><span class="mono">→</span></a>
     </div>
   </section>
 
@@ -83,7 +83,7 @@
   <section class="win" id="ledger" data-x="30%" data-y="30%" style="--w:720px" hidden>
     <header class="win-bar"><span>ledger.log</span><button class="close" aria-label="Close">✕</button></header>
     <div class="win-body">
-      <p class="meta mono">Sep 2026 · 8 real asks · anonymized</p>
+      <p class="meta mono">Sep 2026 · n = 8 · anonymized</p>
       <blockquote>“You always take care of things and it doesn't get dropped.”<cite class="mono">— Our first client, Sep 15 <span class="improve">To improve: speed, attention to detail.</span></cite></blockquote>
       <table class="ledger mono">
         <thead><tr><th>Date</th><th>Ask</th><th>Pinged exec <span class="tip" tabindex="0" aria-label="How many times the exec had to answer or decide something.">?<span class="tip-text" role="tooltip">How many times the exec had to answer or decide something.</span></span></th><th>Agent-ready <span class="tip tip-r" tabindex="0" aria-label="Could an AI assistant with your inbox, calendar and Slack connected do this today?">?<span class="tip-text" role="tooltip">Could an AI assistant with your inbox, calendar and Slack connected do this today?</span></span></th></tr></thead>
@@ -98,7 +98,7 @@
           <tr><td>09-16</td><td><span class="ask">Conference notebooks for Florida and Canada on a last-minute timeline.</span><button class="depth mono" aria-expanded="false" aria-controls="steps-7">7 steps</button><ol class="steps" id="steps-7" hidden><li>Last month: sourced a vendor to make notebooks for a conference.</li><li>This month: a last-minute call to send them to a second one.</li><li>Original vendor couldn't meet the new timeline.</li><li>Found a second vendor who could. Tracked it against the deadline.</li><li>Shipped to Florida and Canada. Looked done.</li><li>Canada shipment stuck at customs. The vendor couldn't clear it.</li><li>Found a vendor who ships to Canada. Then they ran out of stock. Still on it.</li></ol></td><td class="ping">0</td><td class="ready"><b>Partly</b> <em>real-world actions</em></td></tr>
         </tbody>
       </table>
-      <a href="#" class="next" data-open="rules"><span class="mono">Next</span><span>What your EA learns</span><span class="mono">rules.md →</span></a>
+      <a href="#" class="next" data-open="rules"><span class="mono">Next</span><span>rules.md</span><span class="mono">→</span></a>
     </div>
   </section>
 
@@ -106,19 +106,17 @@
   <section class="win" id="rules" data-x="8%" data-y="36%" style="--w:460px" hidden>
     <header class="win-bar"><span>rules.md</span><button class="close" aria-label="Close">✕</button></header>
     <div class="win-body">
-      <p class="meta mono">What your EA knows · learned in week one</p>
+      <p class="meta mono">Week one</p>
       <ol class="rules">
         <li>Look at the calendar first. They may already be in a room together.</li>
         <li>Offer two options. Say which one is better for us.</li>
         <li>Always give a fallback, so a no doesn't end the thread.</li>
         <li>Be honest about the cost to the other side. “That's 5 AM for them.”</li>
-        <li>Second change? Apologise once. Explain briefly.</li>
         <li>Don't move meetings on a Friday.</li>
-        <li>Batch yes/no questions so the founder answers in one reply.</li>
         <li>When they change something themselves, ask why. Keep the rule.</li>
         <li>Tell them about a mistake before they find it.</li>
       </ol>
-      <a href="#" class="next" data-open="team"><span class="mono">Next</span><span>Who does the work</span><span class="mono">team/ →</span></a>
+      <a href="#" class="next" data-open="team"><span class="mono">Next</span><span>team/</span><span class="mono">→</span></a>
     </div>
   </section>
 
@@ -132,7 +130,7 @@
         <p class="lede">Pranjali Awasthi</p>
         <p>For our first three customers, your EA is me.</p>
         <dl class="mono">
-          <dt class="power">Superpower</dt><dd class="power">The brains behind Proxy. Designs the software your EA works in.</dd>
+          <dt class="power">Superpower</dt><dd class="power">The brains behind Proxy.</dd>
           <dt>Experience</dt><dd>Two-time founder.</dd>
           <dt>Before</dt><dd>One company through HF0, acquired. One through YC.</dd>
           <dt>Based</dt><dd>Bay Area</dd>
@@ -140,7 +138,7 @@
       </div>
     </div>
     <div class="win-foot">
-      <a href="#" class="next" data-open="martin"><span class="mono">Next</span><span>Martin</span><span class="mono">martin.cv →</span></a>
+      <a href="#" class="next" data-open="martin"><span class="mono">Next</span><span>martin.cv</span><span class="mono">→</span></a>
     </div>
   </section>
 
@@ -158,8 +156,8 @@
         <a href="#" data-open="michelle" class="finder-item draft"><svg viewBox="0 0 40 48"><path d="M1 1h26l12 12v34H1z M27 1v12h12"/><text x="20" y="38">CV</text></svg><span>michelle.cv</span></a>
       </div>
       <p class="meta mono">Names withheld until you're matched</p>
-      <p>Our EAs bring close to a decade each and have led teams of up to 100 assistants. For our first three customers, your EA is Pranjali.</p>
-      <a href="#" class="next" data-open="operator"><span class="mono">Next</span><span>Meet Operator 001</span><span class="mono">operator-001.cv →</span></a>
+      <p>Close to a decade each. Led teams of up to 100 assistants.</p>
+      <a href="#" class="next" data-open="operator"><span class="mono">Next</span><span>operator-001.cv</span><span class="mono">→</span></a>
     </div>
   </section>
 
@@ -171,7 +169,6 @@
       <div>
         <p class="meta mono">EA · joined Sep 2026</p>
         <p class="lede">Martin <span class="redact" aria-label="Surname withheld">xxxxxxx</span></p>
-        <p>Nine years as an EA and chief of staff. Technical.</p>
         <dl class="mono">
           <dt class="power">Superpower</dt><dd class="power">Writes his own automations.</dd>
           <dt>Experience</dt><dd>9 years. EA and chief of staff.</dd>
@@ -181,7 +178,7 @@
       </div>
     </div>
     <div class="win-foot">
-      <a href="#" class="next" data-open="nova"><span class="mono">Next</span><span>Nova</span><span class="mono">nova.cv →</span></a>
+      <a href="#" class="next" data-open="nova"><span class="mono">Next</span><span>nova.cv</span><span class="mono">→</span></a>
     </div>
   </section>
 
@@ -191,9 +188,8 @@
     <div class="win-body cv">
       <div class="withheld mono">Photo<br>withheld</div>
       <div>
-        <p class="meta mono">EA · codename · 10 years</p>
+        <p class="meta mono">EA · codename</p>
         <p class="lede">Nova</p>
-        <p>Ran quality for a hundred assistants.</p>
         <dl class="mono">
           <dt class="power">Superpower</dt><dd class="power">Five years of sales analytics for a consumer brand.</dd>
           <dt>Experience</dt><dd>10 years.</dd>
@@ -203,7 +199,7 @@
       </div>
     </div>
     <div class="win-foot">
-      <a href="#" class="next" data-open="kai"><span class="mono">Next</span><span>Kai</span><span class="mono">kai.cv →</span></a>
+      <a href="#" class="next" data-open="kai"><span class="mono">Next</span><span>kai.cv</span><span class="mono">→</span></a>
     </div>
   </section>
 
@@ -213,9 +209,8 @@
     <div class="win-body cv">
       <div class="withheld mono">Photo<br>withheld</div>
       <div>
-        <p class="meta mono">EA · codename · 10 years</p>
+        <p class="meta mono">EA · codename</p>
         <p class="lede">Kai</p>
-        <p>Seven years inside a global assistant company. Started as an assistant. Left having built its dedicated-assistant product.</p>
         <dl class="mono">
           <dt class="power">Superpower</dt><dd class="power">Licensed CPA. Taught college accounting.</dd>
           <dt>Experience</dt><dd>10 years.</dd>
@@ -225,7 +220,7 @@
       </div>
     </div>
     <div class="win-foot">
-      <a href="#" class="next" data-open="terms"><span class="mono">Next</span><span>Pricing and guarantee</span><span class="mono">terms.pdf →</span></a>
+      <a href="#" class="next" data-open="terms"><span class="mono">Next</span><span>terms.pdf</span><span class="mono">→</span></a>
     </div>
   </section>
 
@@ -248,7 +243,7 @@
       </div>
     </div>
     <div class="win-foot">
-      <a href="#" class="next" data-open="michelle"><span class="mono">Next</span><span>Michelle</span><span class="mono">michelle.cv →</span></a>
+      <a href="#" class="next" data-open="michelle"><span class="mono">Next</span><span>michelle.cv</span><span class="mono">→</span></a>
     </div>
   </section>
 
@@ -271,7 +266,7 @@
       </div>
     </div>
     <div class="win-foot">
-      <a href="#" class="next" data-open="terms"><span class="mono">Next</span><span>Pricing and guarantee</span><span class="mono">terms.pdf →</span></a>
+      <a href="#" class="next" data-open="terms"><span class="mono">Next</span><span>terms.pdf</span><span class="mono">→</span></a>
     </div>
   </section>
 
@@ -282,10 +277,10 @@
       <dl class="terms">
         <dt class="mono">Price</dt><dd>$2,000 / month</dd>
         <dt class="mono">Hours</dt><dd>Mon–Fri, 9 AM–6 PM PT. Weekends for anything urgent.</dd>
-        <dt class="mono">Seats</dt><dd>First three customers. Market rate after.</dd>
+        <dt class="mono">Seats</dt><dd>Three.</dd>
         <dt class="mono">Guarantee</dt><dd>30 days in, we show you what we took off your plate. Not worth $2,000? You get it back.</dd>
       </dl>
-      <a href="#" class="next primary" data-open="access"><span class="mono">Next</span><span>Request access</span><span class="mono">request-access →</span></a>
+      <a href="#" class="next primary" data-open="access"><span class="mono">Next</span><span>request-access</span><span class="mono">→</span></a>
     </div>
   </section>
 
@@ -299,7 +294,7 @@
         <label><span class="mono">Company</span><input name="company" autocomplete="organization"></label>
         <label><span class="mono">First thing you'd hand off</span><textarea name="handoff" rows="3"></textarea></label>
         <button type="submit" class="submit">Request access →</button>
-        <p class="meta mono" id="form-note">Three seats at launch.</p>
+        <p class="meta mono" id="form-note"></p>
       </form>
     </div>
   </section>
@@ -308,7 +303,6 @@
   <section class="win" id="trash" data-x="62%" data-y="52%" style="--w:340px" hidden>
     <header class="win-bar"><span>Trash</span><button class="close" aria-label="Close">✕</button></header>
     <div class="win-body">
-      <p class="meta mono">Things you won't do again</p>
       <ul class="trashlist">
         <li>Chasing a reply</li>
         <li>Rescheduling for the third time</li>
@@ -317,13 +311,13 @@
         <li>Filing receipts</li>
         <li>“Does this time work?”</li>
       </ul>
-      <a href="#" class="next primary" data-open="access"><span class="mono">Next</span><span>Request access</span><span class="mono">request-access →</span></a>
+      <a href="#" class="next primary" data-open="access"><span class="mono">Next</span><span>request-access</span><span class="mono">→</span></a>
     </div>
   </section>
 
   <p class="colophon mono">Proxy v0.1 · 2026-09-22 · Geist / Geist Mono</p>
 </main>
 
-<script src="app.js?v=1790292457"></script>
+<script src="app.js?v=1790292559"></script>
 </body>
 </html>
