@@ -199,7 +199,7 @@ blockquote cite .improve { display: block; margin-top: 7px; color: color-mix(in 
 .cv > * + * { margin-top: 0; }
 .cv > div > * + * { margin-top: 10px; }
 .cv img { width: 160px; height: 200px; object-fit: cover; object-position: 50% 45%; filter: grayscale(1) contrast(1.08); display: block; }
-.cv dl { display: grid; grid-template-columns: 52px 1fr; gap: 6px 10px; padding-top: 8px; border-top: 1px solid var(--rule); }
+.cv dl { display: grid; grid-template-columns: 88px 1fr; gap: 6px 10px; padding-top: 8px; border-top: 1px solid var(--rule); }
 .cv dt { color: var(--ink-3); text-transform: uppercase; }
 .cv dd { font: 13px/1.4 var(--sans); letter-spacing: 0; }
 
