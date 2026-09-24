@@ -171,6 +171,7 @@ figcaption .mono { margin-right: 6px; color: var(--ink); }
 .ledger td.ready em { font-style: normal; color: var(--ink-3); }
 .ledger tr.warn td.ready b { text-decoration: line-through; color: var(--ink-3); }
 .ask { display: block; }
+.ask-2 { display: block; margin-top: 2px; color: var(--ink-3); }
 .depth { margin-top: 6px; padding: 1px 6px; border: 1px solid var(--ink); font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.04em; }
 .depth::after { content: " +"; }
 .depth[aria-expanded="true"] { background: var(--ink); color: var(--paper); }
