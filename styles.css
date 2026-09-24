@@ -259,3 +259,20 @@ form .meta { margin-top: 10px; }
 .preview .finder-item.draft { display: flex; }
 .preview .win.draft:not([hidden]) { display: flex; }
 .draft-stamp { color: #b3261e; text-transform: uppercase; }
+
+/* Header tooltips */
+.ledger th { position: relative; white-space: nowrap; }
+.tip {
+  display: inline-grid; place-items: center; width: 14px; height: 14px; margin-left: 3px;
+  border: 1px solid var(--ink-3); border-radius: 50%; font-size: 9px; line-height: 1; color: var(--ink-2);
+  cursor: help; position: relative; vertical-align: 1px;
+}
+.tip-text {
+  position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); z-index: 5;
+  width: 210px; padding: 8px 10px; background: var(--ink); color: var(--paper);
+  font: 12px/1.4 var(--sans); letter-spacing: 0; text-transform: none; text-align: left; white-space: normal;
+  opacity: 0; pointer-events: none; transition: opacity 0.12s;
+}
+.tip-r .tip-text { left: auto; right: -4px; transform: none; }
+.tip:hover .tip-text, .tip:focus .tip-text { opacity: 1; }
+.tip:hover, .tip:focus { border-color: var(--ink); color: var(--ink); outline: none; }
