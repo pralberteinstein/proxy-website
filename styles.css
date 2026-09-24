@@ -128,7 +128,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .finder-item svg path { fill: var(--paper); stroke: var(--ink); stroke-width: 1; vector-effect: non-scaling-stroke; }
 .finder-item svg text { font: 500 8px var(--mono); fill: var(--ink); text-anchor: middle; }
 .finder-item .thumb { width: 48px; height: 58px; border: 1px solid var(--ink); overflow: hidden; display: block; }
-.finder-item .thumb img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; filter: grayscale(1) contrast(1.08); display: block; }
+.finder-item .thumb img { width: 100%; height: 100%; object-fit: cover; object-position: 45% 15%; filter: grayscale(1) contrast(1.08); display: block; }
 .finder-item > span:last-child { font: 11px/1.2 var(--mono); padding: 2px 4px; }
 .finder-item:hover > span:last-child, .finder-item:focus-visible > span:last-child { background: var(--ink); color: var(--paper); }
 
@@ -198,7 +198,7 @@ blockquote cite .improve { display: block; margin-top: 7px; color: color-mix(in 
 .cv { display: grid; grid-template-columns: 160px 1fr; gap: 18px; align-items: start; }
 .cv > * + * { margin-top: 0; }
 .cv > div > * + * { margin-top: 10px; }
-.cv img { width: 160px; height: 200px; object-fit: cover; object-position: 50% 45%; filter: grayscale(1) contrast(1.08); display: block; }
+.cv img { width: 160px; height: 200px; object-fit: cover; object-position: 45% 15%; filter: grayscale(1) contrast(1.08); display: block; }
 .cv dl { display: grid; grid-template-columns: 88px 1fr; gap: 6px 10px; padding-top: 8px; border-top: 1px solid var(--rule); }
 .cv dt { color: var(--ink-3); text-transform: uppercase; }
 .cv dd { font: 13px/1.4 var(--sans); letter-spacing: 0; }
