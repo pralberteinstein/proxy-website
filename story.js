@@ -8,9 +8,6 @@
 
   const G = 18; // face grid
   const face = (x, y) => ((x - 8.5) / 5.2) ** 2 + ((y - 9.8) / 6.2) ** 2 <= 1;
-  const hairYou = (x, y) =>
-    (((x - 8.5) / 7) ** 2 + ((y - 6) / 5) ** 2 <= 1 && y <= 6) ||
-    ((x <= 3 || x >= 14) && y >= 4 && y <= 17 && Math.abs(x - 8.5) <= 7);
   const hairEA = (x, y) =>
     (((x - 8.5) / 6.2) ** 2 + ((y - 5.5) / 3.6) ** 2 <= 1 && y <= 6) ||
     (y === 7 && x >= 4 && x <= 7);
@@ -48,7 +45,8 @@
     youX = Math.round(W * 0.3 - (G * p) / 2);
     eaX = Math.round(W * 0.7 - (G * p) / 2);
     const mk = (list, start) => list.map(px => ({ ...px, appear: start + Math.random() * SPREAD, ox: 0, oy: 0, vx: 0, vy: 0 }));
-    you = mk(pixels(hairYou), T.you);
+    // Same silhouette for both, so your EA fits your outline exactly
+    you = mk(pixels(hairEA), T.you);
     ea = mk(pixels(hairEA), T.ea);
   }
 
