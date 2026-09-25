@@ -189,6 +189,26 @@
     document.getElementById('item-count').textContent = '6 items';
   }
 
+  // Drop a few icons at random spots just right of a window, not overlapping each other
+  function scatterIcons(ids, beside) {
+    const d = desk.getBoundingClientRect(), b = beside.getBoundingClientRect();
+    const x0 = b.right - d.left + 24, x1 = Math.min(x0 + 200, d.width * 0.8 - 100);
+    const y0 = b.top - d.top, y1 = Math.min(y0 + b.height + 60, d.height - 100);
+    const placed = [];
+    ids.forEach(id => {
+      const icon = document.querySelector(`.icon[data-open="${id}"]`);
+      if (!icon) return;
+      let x, y, tries = 0;
+      do {
+        x = x0 + Math.random() * Math.max(0, x1 - x0);
+        y = y0 + Math.random() * Math.max(0, y1 - y0);
+      } while (tries++ < 40 && placed.some(p => Math.hypot(p.x - x, p.y - y) < 110));
+      placed.push({ x, y });
+      icon.style.left = Math.round(x) + 'px';
+      icon.style.top = Math.round(y) + 'px';
+    });
+  }
+
   // Initial state
   const hash = location.hash.slice(1);
   const playStory = () => window.dispatchEvent(new Event('story:play'));
@@ -196,11 +216,12 @@
     open(hash || 'readme');
     playStory();
   } else {
-    // Readme on top from the start; ledger loads behind it
-    open('ledger');
+    // Readme and terms open; ledger, method and trash sit loose beside terms
+    open('terms');
     open('readme');
     playStory();
-    if (hash && hash !== 'readme' && hash !== 'ledger') open(hash);
+    scatterIcons(['ledger', 'method', 'trash'], document.getElementById('terms'));
+    if (hash && hash !== 'readme' && hash !== 'terms') open(hash);
   }
   ready = true;
 })();
