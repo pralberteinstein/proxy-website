@@ -37,7 +37,17 @@
     win.dataset.placed = '1';
   }
 
+  // First time the ledger comes forward (after load), its first "steps" button blinks for 3s
+  let ready = false, ledgerBlinked = false;
+  function hintLedger() {
+    const b = document.querySelector('.ledger .depth');
+    if (!b) return;
+    ledgerBlinked = true;
+    setTimeout(() => b.classList.add('blink'), 400);
+  }
+
   function front(win) {
+    if (ready && win.id === 'ledger' && !ledgerBlinked) hintLedger();
     wins.forEach(w => w.classList.remove('front'));
     win.classList.add('front');
     win.style.zIndex = ++z;
@@ -134,6 +144,7 @@
     b.addEventListener('click', () => {
       const open = b.getAttribute('aria-expanded') !== 'true';
       b.setAttribute('aria-expanded', open);
+      b.classList.remove('blink');
       document.getElementById(b.getAttribute('aria-controls')).hidden = !open;
     });
   });
@@ -165,4 +176,5 @@
     playStory();
     if (hash && hash !== 'readme' && hash !== 'ledger') open(hash);
   }
+  ready = true;
 })();

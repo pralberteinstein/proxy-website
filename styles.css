@@ -320,3 +320,8 @@ form .meta { margin-top: 10px; }
 .next:hover span:nth-child(2) { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
 @keyframes cta-blink { 50% { background: transparent; color: var(--ink); } }
 @media (prefers-reduced-motion: reduce) { .next .mono:last-child, .next.blink .mono:last-child { animation: none; } }
+
+/* Ledger hint: first "steps" button blinks for 3s */
+.depth.blink { animation: depth-blink 0.6s steps(1, end) 5; }
+@keyframes depth-blink { 0% { background: var(--ink); color: var(--paper); } 50% { background: none; color: var(--ink); } }
+@media (prefers-reduced-motion: reduce) { .depth.blink { animation: none; } }
