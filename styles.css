@@ -347,3 +347,5 @@ form .meta { margin-top: 10px; }
 .proxy-text p { font-size: 15px; padding: 5px 0; }
 .proxy-text p.mono { font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink); padding: 0 0 6px; }
 .proxy-text p.mono:last-child { padding: 8px 0 0; }
+.story-hint { font: inherit; text-transform: uppercase; letter-spacing: inherit; color: var(--ink-3); cursor: pointer; }
+.story-hint:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }

@@ -139,6 +139,8 @@
   canvas.addEventListener('pointerleave', () => { mouse = null; });
   const play = () => { layout(); t0 = performance.now(); blinked = false; };
   canvas.addEventListener('click', play);
+  const replay = document.getElementById('story-replay');
+  if (replay) replay.addEventListener('click', play);
   window.addEventListener('story:play', play);
   new ResizeObserver(() => layout()).observe(canvas);
 
