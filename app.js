@@ -139,7 +139,7 @@
     rows.forEach((r, i) => setTimeout(() => r.classList.add('in'), 180 * i + 150));
   }
 
-  // Method Fig. 2: the EA's share of the work shrinks as the agents' grows, on a loop
+  // Method Fig. 2: the agents' share (solid) grows as the EA's (outline) shrinks, on a loop
   (() => {
     const ea = document.getElementById('share-ea'), ag = document.getElementById('share-ag'), when = document.getElementById('share-when');
     const method = document.getElementById('method');
@@ -147,8 +147,8 @@
     const W = 600, FROM = 0.9, TO = 0.2, RUN = 5000, HOLD = 1800;
     const set = f => {
       const x = Math.round(W * f);
-      ea.setAttribute('width', x);
-      ag.setAttribute('x', x + 0.5); ag.setAttribute('width', Math.max(0, W - x - 1));
+      ea.setAttribute('width', Math.max(0, x - 1));
+      ag.setAttribute('x', x); ag.setAttribute('width', W - x);
     };
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) { set(TO); when.textContent = 'OVER TIME'; return; }
     let t0 = null;
