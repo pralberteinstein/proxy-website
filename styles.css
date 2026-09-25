@@ -328,3 +328,5 @@ form .meta { margin-top: 10px; }
 .depth.blink { animation: depth-blink 0.6s steps(1, end) 5; }
 @keyframes depth-blink { 0% { background: var(--ink); color: var(--paper); } 50% { background: none; color: var(--ink); } }
 @media (prefers-reduced-motion: reduce) { .depth.blink { animation: none; } }
+
+.cv.no-photo { grid-template-columns: 1fr; }
