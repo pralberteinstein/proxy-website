@@ -312,11 +312,11 @@ form .meta { margin-top: 10px; }
 .next .mono:first-child, .next.primary .mono:first-child { color: var(--ink-3); }
 .next .mono:last-child, .next.primary .mono:last-child {
   justify-self: end; padding: 1px 7px; background: var(--ink); color: var(--paper);
-  animation: cta-blink 1.1s steps(1, end) infinite;
 }
+.next.blink .mono:last-child { animation: cta-blink 0.8s steps(1, end) 5; } /* ~4s, then stays solid */
 .next:hover, .next.primary:hover { background: none; color: var(--ink); opacity: 1; }
 .next:hover .mono:first-child { color: var(--ink-3); }
-.next:hover .mono:last-child { animation: none; color: var(--paper); }
+.next:hover .mono:last-child { animation: none; background: var(--ink); color: var(--paper); }
 .next:hover span:nth-child(2) { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
 @keyframes cta-blink { 50% { background: transparent; color: var(--ink); } }
 @media (prefers-reduced-motion: reduce) { .next .mono:last-child { animation: none; } }

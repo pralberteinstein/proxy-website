@@ -34,6 +34,8 @@
   const STEPS = [[T.you, '01 You'], [T.ea, '02 Your EA'], [T.leave, '03 They think like you'], [T.scan - 300, '04 An agent learns from them']];
 
   let W, H, p, y0, youX, eaX, you = [], ea = [], t0 = Infinity, mouse = null;
+  const cta = document.querySelector('#readme .next');
+  let blinked = false;
 
   function layout() {
     const dpr = window.devicePixelRatio || 1;
@@ -122,6 +124,12 @@
     }
     ctx.globalAlpha = 1;
 
+    // Once the story ends, the readme's CTA blinks for a few seconds
+    if (!blinked && t >= T.scanEnd && cta) {
+      blinked = true;
+      cta.classList.remove('blink'); void cta.offsetWidth; cta.classList.add('blink');
+    }
+
     const cur = STEPS.filter(([at]) => t >= at).pop();
     if (cur && stepEl.textContent !== cur[1]) stepEl.textContent = cur[1];
     requestAnimationFrame(frame);
@@ -129,7 +137,7 @@
 
   canvas.addEventListener('pointermove', e => { const r = canvas.getBoundingClientRect(); mouse = { x: e.clientX - r.left, y: e.clientY - r.top }; });
   canvas.addEventListener('pointerleave', () => { mouse = null; });
-  const play = () => { layout(); t0 = performance.now(); };
+  const play = () => { layout(); t0 = performance.now(); blinked = false; };
   canvas.addEventListener('click', play);
   window.addEventListener('story:play', play);
   new ResizeObserver(() => layout()).observe(canvas);
