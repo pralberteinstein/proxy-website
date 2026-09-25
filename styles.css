@@ -150,6 +150,9 @@ figure + figure { margin-top: 28px; }
 .fig rect, .fig path { fill: none; stroke: var(--ink); stroke-width: 1; vector-effect: non-scaling-stroke; }
 .fig .dash { stroke-dasharray: 3 3; stroke: var(--ink-3); }
 .fig .fill { fill: var(--ink); }
+.fig .faint { stroke: var(--ink-3); }
+.fig .rule { stroke: var(--rule); }
+.fig text.f { fill: var(--ink-3); }
 .fig .head { fill: none; }
 .fig text { font: 13px var(--sans); fill: var(--ink); }
 .fig text.m { font: 9.5px var(--mono); letter-spacing: 0.06em; fill: var(--ink-3); }
