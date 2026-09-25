@@ -6,20 +6,36 @@
   const stepEl = document.getElementById('story-step');
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  const G = 18; // face grid
-  const face = (x, y) => ((x - 8.5) / 5.2) ** 2 + ((y - 9.8) / 6.2) ** 2 <= 1;
-  const hair = (x, y) =>
-    (((x - 8.5) / 6.2) ** 2 + ((y - 5.5) / 3.6) ** 2 <= 1 && y <= 6) ||
-    (y === 7 && x >= 4 && x <= 7);
-  const features = (x, y) =>
-    (y === 10 && (x === 6 || x === 7 || x === 10 || x === 11)) || (y === 13 && x >= 7 && x <= 10);
+  // 16×16 face: short hair cap, wide jaw, 2×2 eyes, nose, smile. '#' is solid; inside is dithered.
+  const FACE = [
+    '................',
+    '.....######.....',
+    '...##########...',
+    '..############..',
+    '..###......###..',
+    '.##..........##.',
+    '.#............#.',
+    '.#..##....##..#.',
+    '.#..##....##..#.',
+    '.#............#.',
+    '.#.....##.....#.',
+    '.#............#.',
+    '.#...#....#...#.',
+    '..#...####...#..',
+    '...#........#...',
+    '....########....',
+  ];
+  const G = FACE.length;
 
-  function pixels(shape) {
+  function pixels() {
     const out = [];
-    for (let y = 0; y < G; y++) for (let x = 0; x < G; x++) {
-      if (shape(x, y) || features(x, y)) out.push({ x, y, k: 'solid' });
-      else if (face(x, y) && (x + y) % 2 === 0) out.push({ x, y, k: 'dither' });
-    }
+    FACE.forEach((row, y) => {
+      const l = row.indexOf('#'), r = row.lastIndexOf('#');
+      [...row].forEach((c, x) => {
+        if (c === '#') out.push({ x, y, k: 'solid' });
+        else if (y >= 4 && l !== -1 && x > l && x < r && (x + y) % 2 === 0) out.push({ x, y, k: 'dither' });
+      });
+    });
     return out;
   }
 
@@ -42,14 +58,14 @@
     W = canvas.clientWidth; H = canvas.clientHeight;
     canvas.width = W * dpr; canvas.height = H * dpr;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    p = Math.max(3, Math.min(7, Math.floor(Math.min(W / 58, H / 20))));
+    p = Math.max(3, Math.min(8, Math.floor(Math.min(W / 52, H / 18))));
     y0 = Math.round((H - G * p) / 2);
     youX = Math.round(W * 0.3 - (G * p) / 2);
     eaX = Math.round(W * 0.7 - (G * p) / 2);
     const mk = (list, start) => list.map(px => ({ ...px, appear: start + Math.random() * SPREAD, ox: 0, oy: 0, vx: 0, vy: 0 }));
     // Same silhouette for both, so your EA fits your outline exactly
-    you = mk(pixels(hair), T.you);
-    ea = mk(pixels(hair), T.ea);
+    you = mk(pixels(), T.you);
+    ea = mk(pixels(), T.ea);
   }
 
   const ease = u => (u < 0.5 ? 4 * u * u * u : 1 - Math.pow(-2 * u + 2, 3) / 2);
