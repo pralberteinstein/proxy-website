@@ -175,12 +175,26 @@
     });
   });
 
-  // Form (not wired to a backend yet)
-  document.getElementById('access-form').addEventListener('submit', e => {
+  // Request access: emailed to the team via FormSubmit, in the background
+  const FORM_ENDPOINT = 'https://formsubmit.co/ajax/pranjali@sabi.com';
+  document.getElementById('access-form').addEventListener('submit', async e => {
     e.preventDefault();
-    const note = document.getElementById('form-note');
-    note.textContent = 'Received. Thank you.';
-    e.target.querySelector('.submit').disabled = true;
+    const form = e.target, note = document.getElementById('form-note'), btn = form.querySelector('.submit');
+    const data = Object.fromEntries(new FormData(form));
+    btn.disabled = true;
+    note.textContent = 'Sending…';
+    try {
+      const res = await fetch(FORM_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ ...data, _subject: `Proxy access request: ${data.name || ''}${data.company ? ' (' + data.company + ')' : ''}`, _template: 'table', _replyto: data.email }),
+      });
+      if (!res.ok) throw new Error(res.status);
+      note.textContent = 'Received. Thank you.';
+    } catch {
+      btn.disabled = false;
+      note.textContent = 'That didn’t go through. Try again, or email pranjali@sabi.com.';
+    }
   });
 
   // Draft files only show with ?preview
