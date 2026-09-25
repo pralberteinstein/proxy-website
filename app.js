@@ -189,7 +189,8 @@
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({ ...data, _subject: `Proxy access request: ${data.name || ''}${data.company ? ' (' + data.company + ')' : ''}`, _template: 'table', _replyto: data.email }),
       });
-      if (!res.ok) throw new Error(res.status);
+      const out = await res.json().catch(() => ({}));
+      if (!res.ok || String(out.success) !== 'true') throw new Error(out.message || res.status);
       note.textContent = 'Received. Thank you.';
     } catch {
       btn.disabled = false;
