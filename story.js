@@ -6,21 +6,19 @@
   const stepEl = document.getElementById('story-step');
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // 28×28 face, drawn from shapes: short hair cap, wide jaw, oval eyes, brows, nose, smile.
-  const G = 28, CX = 13.5, CY = 15, RX = 10.2, RY = 11.5;
-  const inFace = (x, y) => ((x - CX) / RX) ** 2 + ((y - CY) / RY) ** 2 <= 1;
-  const edge = (x, y) => inFace(x, y) && ![[1, 0], [-1, 0], [0, 1], [0, -1]].every(([dx, dy]) => inFace(x + dx, y + dy));
-  const hair = (x, y) => inFace(x, y) && y < CY - RY * 0.52 + (Math.abs(x - CX) > 6.5 ? 1.2 : 0);
-  const eye = (x, y) => [CX - 4.2, CX + 4.2].some(ex => (x - ex) ** 2 / 1.6 + (y - 15) ** 2 / 2.2 <= 1);
-  const brow = (x, y) => y === 11 && [CX - 4.2, CX + 4.2].some(ex => Math.abs(x - ex) <= 1.6);
-  const nose = (x, y) => y === 19 && (x === 13 || x === 14);
-  const mouth = (x, y) => x >= 9 && x <= 18 && Math.abs(y - (22 + (1 - ((x - CX) / 4.5) ** 2) * 1.3)) < 0.6;
+  // The original 18-grid face (short hair with a side fringe, dotted face, eyes, mouth),
+  // redrawn on a finer 28-grid so each pixel is smaller.
+  const G = 28, K = G / 18;
+  const hair = (u, v) => (((u - 8.5) / 6.2) ** 2 + ((v - 5.5) / 3.6) ** 2 <= 1 && v <= 6.5) || (v >= 6.5 && v <= 7.5 && u >= 3.5 && u <= 7.5);
+  const features = (u, v) => (v >= 9.3 && v <= 10.9 && ((u >= 5.5 && u <= 7.5) || (u >= 9.5 && u <= 11.5))) || (v >= 12.5 && v <= 13.5 && u >= 6.5 && u <= 10.5);
+  const inFace = (u, v) => ((u - 8.5) / 5.2) ** 2 + ((v - 9.8) / 6.2) ** 2 <= 1;
 
   function pixels() {
     const out = [];
     for (let y = 0; y < G; y++) for (let x = 0; x < G; x++) {
-      if (hair(x, y) || edge(x, y) || eye(x, y) || brow(x, y) || nose(x, y) || mouth(x, y)) out.push({ x, y, k: 'solid' });
-      else if (inFace(x, y) && (x + y) % 2 === 0) out.push({ x, y, k: 'dither' });
+      const u = (x + 0.5) / K - 0.5, v = (y + 0.5) / K - 0.5;
+      if (hair(u, v) || features(u, v)) out.push({ x, y, k: 'solid' });
+      else if (inFace(u, v) && (x + y) % 2 === 0) out.push({ x, y, k: 'dither' });
     }
     return out;
   }
