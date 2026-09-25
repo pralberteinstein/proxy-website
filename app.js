@@ -158,7 +158,7 @@
         const t = (now - t0) % (RUN + HOLD);
         const u = Math.min(1, t / RUN), e = u < 0.5 ? 2 * u * u : 1 - Math.pow(-2 * u + 2, 2) / 2;
         set(FROM + (TO - FROM) * e);
-        when.textContent = u < 0.15 ? 'START' : u < 1 ? 'OVER TIME' : 'LATER';
+        when.textContent = u < 0.15 ? 'START' : u < 1 ? 'OVER TIME' : 'EVENTUALLY';
       } else t0 = null;
       requestAnimationFrame(tick);
     };
