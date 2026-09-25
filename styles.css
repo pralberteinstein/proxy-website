@@ -330,3 +330,14 @@ form .meta { margin-top: 10px; }
 @media (prefers-reduced-motion: reduce) { .depth.blink { animation: none; } }
 
 .cv.no-photo { grid-template-columns: 1fr; }
+
+/* Method Fig. 2: AI assistants vs Proxy, as text */
+.versus { margin-top: 28px; }
+.versus-lede { font-size: 17px; font-weight: 500; letter-spacing: -0.01em; margin-bottom: 12px; }
+.versus-grid { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--ink); }
+.versus-grid dt, .versus-grid dd { padding: 8px 0; border-bottom: 1px solid var(--rule); font-size: 14px; }
+.versus-grid dt { color: var(--ink-3); padding-right: 12px; }
+.versus-grid dd { color: var(--ink); }
+.versus-grid .mono { font-size: 11px; text-transform: uppercase; }
+.versus-grid dd.mono { color: var(--ink); }
+.share { margin-top: 28px; }
