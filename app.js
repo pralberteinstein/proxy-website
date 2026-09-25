@@ -46,8 +46,19 @@
     setTimeout(() => b.classList.add('blink'), 400);
   }
 
+  // First time the team folder opens, Operator 001 is pre-selected and blinks for 3s
+  let teamHinted = false;
+  function hintTeam() {
+    const item = document.querySelector('.finder-item[data-open="operator"]');
+    if (!item) return;
+    teamHinted = true;
+    item.classList.add('selected');
+    setTimeout(() => item.classList.add('blink'), 300);
+  }
+
   function front(win) {
     if (ready && win.id === 'ledger' && !ledgerBlinked) hintLedger();
+    if (win.id === 'team' && !teamHinted) hintTeam();
     wins.forEach(w => w.classList.remove('front'));
     win.classList.add('front');
     win.style.zIndex = ++z;
