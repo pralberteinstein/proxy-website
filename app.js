@@ -139,6 +139,32 @@
     rows.forEach((r, i) => setTimeout(() => r.classList.add('in'), 180 * i + 150));
   }
 
+  // Method Fig. 2: the EA's share of the work shrinks as the agents' grows, on a loop
+  (() => {
+    const ea = document.getElementById('share-ea'), ag = document.getElementById('share-ag'), when = document.getElementById('share-when');
+    const method = document.getElementById('method');
+    if (!ea) return;
+    const W = 600, FROM = 0.9, TO = 0.2, RUN = 5000, HOLD = 1800;
+    const set = f => {
+      const x = Math.round(W * f);
+      ea.setAttribute('width', x);
+      ag.setAttribute('x', x + 0.5); ag.setAttribute('width', Math.max(0, W - x - 1));
+    };
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) { set(TO); when.textContent = 'OVER TIME'; return; }
+    let t0 = null;
+    const tick = now => {
+      if (!method.hidden) {
+        if (t0 === null) t0 = now;
+        const t = (now - t0) % (RUN + HOLD);
+        const u = Math.min(1, t / RUN), e = u < 0.5 ? 2 * u * u : 1 - Math.pow(-2 * u + 2, 2) / 2;
+        set(FROM + (TO - FROM) * e);
+        when.textContent = u < 0.15 ? 'START' : u < 1 ? 'OVER TIME' : 'LATER';
+      } else t0 = null;
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  })();
+
   // Ledger: expand a task to see every step
   document.querySelectorAll('.depth').forEach(b => {
     b.addEventListener('click', () => {
