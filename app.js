@@ -224,10 +224,25 @@
     });
   }
 
+  // Phone: a different reading order through the Next links
+  function phoneOrder() {
+    const setNext = (from, to, label) => {
+      const a = document.querySelector(`#${from} .next`);
+      if (!a) return;
+      a.dataset.open = to;
+      a.querySelector('span:nth-child(2)').textContent = label;
+    };
+    setNext('readme', 'terms', 'terms.pdf');
+    setNext('terms', 'method', 'method.svg');
+    setNext('method', 'ledger', 'ledger.log');
+    setNext('kai', 'access', 'request-access');
+  }
+
   // Initial state
   const hash = location.hash.slice(1);
   const playStory = () => window.dispatchEvent(new Event('story:play'));
   if (isPhone()) {
+    phoneOrder();
     open(hash || 'readme');
     playStory();
   } else {
