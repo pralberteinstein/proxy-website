@@ -234,7 +234,6 @@
     };
     setNext('readme', 'terms', 'terms.pdf');
     setNext('terms', 'method', 'method.svg');
-    setNext('method', 'ledger', 'ledger.log');
     setNext('kai', 'access', 'request-access');
   }
 
@@ -246,11 +245,11 @@
     open(hash || 'readme');
     playStory();
   } else {
-    // Readme and terms open; ledger, method and trash sit loose beside terms
+    // Readme and terms open; method and trash sit loose beside terms
     open('terms');
     open('readme');
     playStory();
-    scatterIcons(['ledger', 'method', 'trash'], document.getElementById('terms'));
+    scatterIcons(['method', 'trash'], document.getElementById('terms'));
     if (hash && hash !== 'readme' && hash !== 'terms') open(hash);
   }
   ready = true;
