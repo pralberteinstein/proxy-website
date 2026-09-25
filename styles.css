@@ -319,4 +319,4 @@ form .meta { margin-top: 10px; }
 .next:hover .mono:last-child { animation: none; background: var(--ink); color: var(--paper); }
 .next:hover span:nth-child(2) { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
 @keyframes cta-blink { 50% { background: transparent; color: var(--ink); } }
-@media (prefers-reduced-motion: reduce) { .next .mono:last-child { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .next .mono:last-child, .next.blink .mono:last-child { animation: none; } }
