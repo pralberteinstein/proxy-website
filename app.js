@@ -245,11 +245,11 @@
     open(hash || 'readme');
     playStory();
   } else {
-    // Readme and terms open; method and trash sit loose beside terms
+    // Readme and terms open; method, team and trash sit loose beside terms
     open('terms');
     open('readme');
     playStory();
-    scatterIcons(['method', 'trash'], document.getElementById('terms'));
+    scatterIcons(['method', 'team', 'trash'], document.getElementById('terms'));
     if (hash && hash !== 'readme' && hash !== 'terms') open(hash);
   }
   ready = true;
