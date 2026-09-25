@@ -6,36 +6,22 @@
   const stepEl = document.getElementById('story-step');
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // 16×16 face: short hair cap, wide jaw, 2×2 eyes, nose, smile. '#' is solid; inside is dithered.
-  const FACE = [
-    '................',
-    '.....######.....',
-    '...##########...',
-    '..############..',
-    '..###......###..',
-    '.##..........##.',
-    '.#............#.',
-    '.#..##....##..#.',
-    '.#..##....##..#.',
-    '.#............#.',
-    '.#.....##.....#.',
-    '.#............#.',
-    '.#...#....#...#.',
-    '..#...####...#..',
-    '...#........#...',
-    '....########....',
-  ];
-  const G = FACE.length;
+  // 28×28 face, drawn from shapes: short hair cap, wide jaw, oval eyes, brows, nose, smile.
+  const G = 28, CX = 13.5, CY = 15, RX = 10.2, RY = 11.5;
+  const inFace = (x, y) => ((x - CX) / RX) ** 2 + ((y - CY) / RY) ** 2 <= 1;
+  const edge = (x, y) => inFace(x, y) && ![[1, 0], [-1, 0], [0, 1], [0, -1]].every(([dx, dy]) => inFace(x + dx, y + dy));
+  const hair = (x, y) => inFace(x, y) && y < CY - RY * 0.52 + (Math.abs(x - CX) > 6.5 ? 1.2 : 0);
+  const eye = (x, y) => [CX - 4.2, CX + 4.2].some(ex => (x - ex) ** 2 / 1.6 + (y - 15) ** 2 / 2.2 <= 1);
+  const brow = (x, y) => y === 11 && [CX - 4.2, CX + 4.2].some(ex => Math.abs(x - ex) <= 1.6);
+  const nose = (x, y) => y === 19 && (x === 13 || x === 14);
+  const mouth = (x, y) => x >= 9 && x <= 18 && Math.abs(y - (22 + (1 - ((x - CX) / 4.5) ** 2) * 1.3)) < 0.6;
 
   function pixels() {
     const out = [];
-    FACE.forEach((row, y) => {
-      const l = row.indexOf('#'), r = row.lastIndexOf('#');
-      [...row].forEach((c, x) => {
-        if (c === '#') out.push({ x, y, k: 'solid' });
-        else if (y >= 4 && l !== -1 && x > l && x < r && (x + y) % 2 === 0) out.push({ x, y, k: 'dither' });
-      });
-    });
+    for (let y = 0; y < G; y++) for (let x = 0; x < G; x++) {
+      if (hair(x, y) || edge(x, y) || eye(x, y) || brow(x, y) || nose(x, y) || mouth(x, y)) out.push({ x, y, k: 'solid' });
+      else if (inFace(x, y) && (x + y) % 2 === 0) out.push({ x, y, k: 'dither' });
+    }
     return out;
   }
 
@@ -58,7 +44,7 @@
     W = canvas.clientWidth; H = canvas.clientHeight;
     canvas.width = W * dpr; canvas.height = H * dpr;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    p = Math.max(3, Math.min(8, Math.floor(Math.min(W / 52, H / 18))));
+    p = Math.max(2, Math.min(5, Math.floor(Math.min(W / 60, H / 28))));
     y0 = Math.round((H - G * p) / 2);
     youX = Math.round(W * 0.3 - (G * p) / 2);
     eaX = Math.round(W * 0.7 - (G * p) / 2);
@@ -103,7 +89,7 @@
       nudge(q, x, y);
       const a = clamp((t - q.appear) / 120);
       const X = Math.round(x + q.ox), Y = Math.round(y + q.oy);
-      const s = q.k === 'dither' ? p - 1 : p;
+      const s = q.k === 'dither' ? Math.max(1, p - 2) : p;
       if (leave < 1) { ctx.globalAlpha = a * (1 - leave); ctx.fillStyle = ink; ctx.fillRect(X, Y, s, s); }
       if (leave > 0 && q.k === 'solid') {
         ctx.globalAlpha = leave; ctx.strokeStyle = faint; ctx.lineWidth = 1;
@@ -118,7 +104,7 @@
       nudge(q, x, y);
       ctx.globalAlpha = clamp((t - q.appear) / 120);
       ctx.fillStyle = ink;
-      const s = q.k === 'dither' ? p - 1 : p;
+      const s = q.k === 'dither' ? Math.max(1, p - 2) : p;
       ctx.fillRect(Math.round(x + q.ox), Math.round(y + q.oy), s, s);
     }
 
