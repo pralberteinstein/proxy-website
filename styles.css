@@ -341,3 +341,9 @@ form .meta { margin-top: 10px; }
 .versus-grid .mono { font-size: 11px; text-transform: uppercase; }
 .versus-grid dd.mono { color: var(--ink); }
 .share { margin-top: 28px; }
+
+/* Method Fig. 1: Proxy side as text under the agency row */
+.proxy-text { margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--rule); }
+.proxy-text p { font-size: 15px; padding: 5px 0; }
+.proxy-text p.mono { font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink); padding: 0 0 6px; }
+.proxy-text p.mono:last-child { padding: 8px 0 0; }
