@@ -69,6 +69,8 @@
     const win = document.getElementById(id);
     if (!win) return;
     const wasHidden = win.hidden;
+    // Phone windows are full-screen sheets: show one at a time
+    if (isPhone()) wins.forEach(w => { if (w !== win) { w.hidden = true; w.classList.remove('front'); } });
     win.hidden = false;
     place(win);
     front(win);

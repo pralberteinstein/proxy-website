@@ -242,7 +242,7 @@ form .meta { margin-top: 10px; }
   .icon span { font-size: 10px; word-break: break-all; }
   .bar-l a:not(.wordmark):not(:last-child) { display: none; }
   .status { display: none; }
-  .win { position: fixed; left: 0 !important; top: var(--bar-h) !important; width: 100%; max-height: none; height: calc(100% - var(--bar-h)); border: 0; border-top: 1px solid var(--ink); z-index: 900 !important; }
+  .win { position: fixed; left: 0 !important; top: var(--bar-h) !important; width: 100%; max-height: none; height: calc(100% - var(--bar-h)); border: 0; border-top: 1px solid var(--ink); }
   .win-bar { height: 40px; font-size: 12px; }
   .close { width: 40px; height: 40px; }
   .cv { grid-template-columns: 1fr; }
