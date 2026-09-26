@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=1790466217">
+<link rel="stylesheet" href="styles.css?v=1790466337">
 </head>
 <body>
 
@@ -29,6 +29,7 @@
   <!-- Icons -->
   <button class="icon" data-open="readme"  style="--x:84%;--y:9%"><svg viewBox="0 0 40 48"><path d="M1 1h26l12 12v34H1z M27 1v12h12"/><text x="20" y="38">TXT</text></svg><span>readme.txt</span></button>
   <button class="icon" data-open="method"  style="--x:92%;--y:9%"><svg viewBox="0 0 40 48"><path d="M1 1h26l12 12v34H1z M27 1v12h12"/><text x="20" y="38">SVG</text></svg><span>method.svg</span></button>
+  <button class="icon" data-open="ledger"  style="--x:84%;--y:27%"><svg viewBox="0 0 40 48"><path d="M1 1h26l12 12v34H1z M27 1v12h12"/><text x="20" y="38">LOG</text></svg><span>ledger.log</span></button>
   <button class="icon" data-open="team" style="--x:84%;--y:45%"><svg viewBox="0 0 40 48"><path d="M1 9h14l4 5h20v33H1z"/></svg><span>team/</span></button>
   <button class="icon" data-open="terms"   style="--x:92%;--y:45%"><svg viewBox="0 0 40 48"><path d="M1 1h26l12 12v34H1z M27 1v12h12"/><text x="20" y="38">PDF</text></svg><span>terms.pdf</span></button>
   <button class="icon" data-open="access"  style="--x:84%;--y:63%"><svg viewBox="0 0 40 48"><path d="M1 1h38v46H1z M1 13h38"/><path d="M8 24h24 M8 31h24 M8 38h14"/></svg><span>request-access</span></button>
@@ -85,7 +86,7 @@
         </svg>
         <figcaption><span class="mono">Fig. 2</span> Who does the work.</figcaption>
       </figure>
-      <a href="#" class="next" data-open="team"><span class="mono">Next</span><span>team/</span><span class="mono">→</span></a>
+      <a href="#" class="next" data-open="ledger"><span class="mono">Next</span><span>ledger.log</span><span class="mono">→</span></a>
     </div>
   </section>
 
@@ -107,6 +108,22 @@
     </div>
     <div class="win-foot">
       <a href="#" class="next" data-open="martin"><span class="mono">Next</span><span>martin.cv</span><span class="mono">→</span></a>
+    </div>
+  </section>
+
+  <!-- ledger.log -->
+  <section class="win" id="ledger" data-x="30%" data-y="30%" style="--w:620px" hidden>
+    <header class="win-bar"><span>ledger.log</span><button class="close" aria-label="Close">✕</button></header>
+    <div class="win-body">
+      <p class="meta mono">Sep 2026 · n = 4 · anonymized</p>
+      <blockquote class="testimonial"><span class="tag mono">Client testimonial</span><p>“You always take care of things and it doesn't get dropped.”</p><cite class="mono">— Our first client, Sep 15 <span class="improve">To improve: speed, attention to detail.</span></cite></blockquote>
+      <ol class="tasks">
+        <li class="task"><span class="task-date mono">09-10</span><div><span class="ask">An onsite that started as one invite and ended as six moving parts.</span><button class="depth mono" aria-expanded="false" aria-controls="steps-0">6 steps</button><ol class="steps" id="steps-0" hidden><li>Add a second candidate to the same onsite.</li><li>Confirm an NDA was in place. It already was.</li><li>Extend both candidates to 4:30. One asked to start earlier to beat traffic.</li><li>Book three rooms at a coworking space. Found who had access.</li><li>Slot a 30 min side meeting for the founder.</li><li>Update every invite with individual agendas.</li></ol></div></li>
+        <li class="task"><span class="task-date mono">09-14</span><div><span class="ask">Got five busy people in one room before one of them left for Europe.</span><button class="depth mono" aria-expanded="false" aria-controls="steps-1">8 steps</button><ol class="steps" id="steps-1" hidden><li>Founder out most of the afternoon. One attendee flying to Europe in two days.</li><li>Spotted all five already booked together at 6:30.</li><li>Asked the founder if that meeting could move. Yes.</li><li>Asked its owner to start 30 min earlier. Explained why.</li><li>No reply in 45 min. Nudged once, then gave him an easy out.</li><li>He moved it. Booked 7 PM in person.</li><li>Pulled in the fifth person despite a conflict.</li><li>Attendee warned it could run two hours. Checked with the founder and held the slot.</li></ol></div></li>
+        <li class="task"><span class="task-date mono">09-15</span><div><span class="ask">Booked a candidate 14 hours ahead without asking them to take a 5 AM call.</span><button class="depth mono" aria-expanded="false" aria-controls="steps-2">5 steps</button><ol class="steps" id="steps-2" hidden><li>The only slot the candidate offered was 11 PM their time.</li><li>Proposed a founder evening instead. Candidate agreed.</li><li>Founder's evening filled up. Offered 3 PM and said plainly it was 5 AM for them.</li><li>Recruiter declined for the candidate's sake.</li><li>Asked the founder for a one-off early start. Booked 8:30 AM PT.</li></ol></div></li>
+        <li class="task"><span class="task-date mono">09-16</span><div><span class="ask">Three vendors, two countries, one customs hold. Still on it.</span><button class="depth mono" aria-expanded="false" aria-controls="steps-3">7 steps</button><ol class="steps" id="steps-3" hidden><li>Last month: sourced a vendor to make notebooks for a conference.</li><li>This month: a last-minute call to send them to a second one.</li><li>Original vendor couldn't meet the new timeline.</li><li>Found a second vendor who could. Tracked it against the deadline.</li><li>Shipped to Florida and Canada. Looked done.</li><li>Canada shipment stuck at customs. The vendor couldn't clear it.</li><li>Found a vendor who ships to Canada. Then they ran out of stock. Still on it.</li></ol></div></li>
+      </ol>
+      <a href="#" class="next" data-open="team"><span class="mono">Next</span><span>team/</span><span class="mono">→</span></a>
     </div>
   </section>
 
@@ -277,6 +294,6 @@
 </main>
 
 <script src="story.js?v=1790316668"></script>
-<script src="app.js?v=1790466217"></script>
+<script src="app.js?v=1790466337"></script>
 </body>
 </html>

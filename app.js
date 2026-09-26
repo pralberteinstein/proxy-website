@@ -40,7 +40,7 @@
   // First time the ledger comes forward (after load), its first "steps" button blinks for 3s
   let ready = false, ledgerBlinked = false;
   function hintLedger() {
-    const b = document.querySelector('.ledger .depth');
+    const b = document.querySelector('#ledger .depth');
     if (!b) return;
     ledgerBlinked = true;
     setTimeout(() => b.classList.add('blink'), 400);
@@ -143,7 +143,7 @@
   // Ledger rows arrive one by one
   let played = false;
   function playLedger() {
-    const rows = [...document.querySelectorAll('.ledger tbody tr')];
+    const rows = [...document.querySelectorAll('#ledger .task')];
     if (played || matchMedia('(prefers-reduced-motion: reduce)').matches) {
       rows.forEach(r => r.classList.add('in'));
       return;
@@ -247,6 +247,7 @@
     };
     setNext('readme', 'terms', 'terms.pdf');
     setNext('terms', 'method', 'method.svg');
+    setNext('method', 'ledger', 'ledger.log');
     setNext('kai', 'access', 'request-access');
   }
 
@@ -258,11 +259,11 @@
     open(hash || 'readme');
     playStory();
   } else {
-    // Readme and terms open; method, team and trash sit loose beside terms
+    // Readme and terms open; method, ledger, team and trash sit loose beside terms
     open('terms');
     open('readme');
     playStory();
-    scatterIcons(['method', 'team', 'trash'], document.getElementById('terms'));
+    scatterIcons(['method', 'ledger', 'team', 'trash'], document.getElementById('terms'));
     if (hash && hash !== 'readme' && hash !== 'terms') open(hash);
   }
   ready = true;

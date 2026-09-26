@@ -356,3 +356,11 @@ form .meta { margin-top: 10px; }
 .finder-item.blink .thumb { animation: thumb-blink 0.6s steps(1, end) 5; }
 @keyframes thumb-blink { 50% { outline-color: transparent; } }
 @media (prefers-reduced-motion: reduce) { .finder-item.blink .thumb { animation: none; } }
+
+/* Ledger v2: a list of tasks, no columns */
+.tasks { list-style: none; border-top: 1px solid var(--ink); }
+.task { display: grid; grid-template-columns: 52px 1fr; gap: 10px; padding: 12px 0; border-bottom: 1px solid var(--rule); opacity: 0; }
+.task.in { opacity: 1; transition: opacity 0.25s; }
+.task-date { color: var(--ink-3); line-height: 1.9; }
+.task .ask { font-size: 15px; }
+@media (prefers-reduced-motion: reduce) { .task { opacity: 1; } }
