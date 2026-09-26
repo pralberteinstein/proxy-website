@@ -364,3 +364,4 @@ form .meta { margin-top: 10px; }
 .task-date { color: var(--ink-3); line-height: 1.9; }
 .task .ask { font-size: 15px; }
 @media (prefers-reduced-motion: reduce) { .task { opacity: 1; } }
+.tasks-title { font-size: 17px; font-weight: 500; letter-spacing: -0.01em; margin-top: 18px; }
