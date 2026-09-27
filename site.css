@@ -169,3 +169,4 @@ input:focus, textarea:focus { outline: none; border-bottom-width: 2px; }
 .person .led { color: var(--ink); }
 .person .worked { color: var(--ink-2); }
 .person .led .mono, .person .worked .mono { display: block; margin-bottom: 2px; text-transform: uppercase; color: var(--ink-3); }
+.task p { font-size: 16px; line-height: 1.5; }
