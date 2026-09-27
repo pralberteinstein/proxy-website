@@ -16,9 +16,6 @@
   tick(); setStatus();
   setInterval(() => { tick(); if (new Date().getSeconds() === 0) setStatus(); }, 1000);
 
-  // Hero story starts on load
-  window.dispatchEvent(new Event('story:play'));
-
   // Task steps expand in place
   document.querySelectorAll('.depth').forEach(b => {
     b.addEventListener('click', () => {
