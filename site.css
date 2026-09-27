@@ -163,3 +163,9 @@ input:focus, textarea:focus { outline: none; border-bottom-width: 2px; }
   html { scroll-behavior: auto; }
   .dot { animation: none; }
 }
+
+/* People: led-EAs signal and past workplaces */
+.person .led, .person .worked { margin-top: 10px; font-size: 14px; }
+.person .led { color: var(--ink); }
+.person .worked { color: var(--ink-2); }
+.person .led .mono, .person .worked .mono { display: block; margin-bottom: 2px; text-transform: uppercase; color: var(--ink-3); }
