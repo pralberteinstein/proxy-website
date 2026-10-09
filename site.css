@@ -173,3 +173,14 @@ input:focus, textarea:focus { outline: none; border-bottom-width: 2px; }
 .why { padding-bottom: 20px; }
 .why p { font-size: 17px; line-height: 1.55; color: var(--ink-2); }
 .why p + p { margin-top: 12px; }
+
+/* Service levels */
+.sla { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--ink); margin-top: 28px !important; }
+.sla > div { padding: 18px 16px 20px 0; border-bottom: 1px solid var(--rule); }
+.sla > div + div { padding-left: 16px; border-left: 1px solid var(--rule); }
+.sla-n { font-size: 34px; font-weight: 500; letter-spacing: -0.035em; line-height: 1; }
+.sla-l { margin-top: 10px; color: var(--ink-3); text-transform: uppercase; line-height: 1.5; }
+@media (max-width: 760px) {
+  .sla { grid-template-columns: 1fr 1fr; }
+  .sla > div:nth-child(3) { padding-left: 0; border-left: 0; }
+}
