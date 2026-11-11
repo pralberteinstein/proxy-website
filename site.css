@@ -184,3 +184,5 @@ input:focus, textarea:focus { outline: none; border-bottom-width: 2px; }
   .sla { grid-template-columns: 1fr 1fr; }
   .sla > div:nth-child(3) { padding-left: 0; border-left: 0; }
 }
+.bar-hire { padding-bottom: 24px; margin-bottom: 4px; border-bottom: 1px solid var(--rule); }
+.bar-hire p + p { margin-top: 12px; font-size: 17px; line-height: 1.55; }
